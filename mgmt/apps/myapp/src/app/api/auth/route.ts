@@ -1,21 +1,23 @@
+// import jwt from "jsonwebtoken";
 
-import jwt from "jsonwebtoken"
+// // Ensure to replace 'your-secret-key' with a real secret key
+// const secret = process.env.SECRET || 'your-secret-key';
 
+// export const authenticate = (req: Request) => {
+//     const authHeader = req.headers.get('authorization');
+    
+//     if (!authHeader) {
+//         return { authenticated: false, message: 'No token provided' };
+//     }
+    
+//     // Extract token from 'Bearer <token>' format
+//     const token = authHeader.replace('Bearer ', '');
 
-
-const secret = process.env.SECRET!;
-export const authenticat = (req : Request)=>{
-    const fulltoken = req.headers.get('authorization')
-    if(!fulltoken) {
-        return { authenticated: false, message: 'No token provided' };
-    }
-    const token = fulltoken[1]
-
-    try{
-            const decoded = jwt.verify(token, secret)
-            return { authenticated: true,user: decoded };
-    }catch(e){
-        console.error('Error during user auth middleware:', e);
-        return { authenticated: false, message: 'Invalid token' };
-    }
-}
+//     try {
+//         const decoded = jwt.verify(token, secret);
+//         return { authenticated: true, user: decoded };
+//     } catch (e) {
+//         console.error('Error during user auth middleware:', e);
+//         return { authenticated: false, message: 'Invalid token' };
+//     }
+// }

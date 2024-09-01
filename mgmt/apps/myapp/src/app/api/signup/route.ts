@@ -9,12 +9,14 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
     await connect();
     const secret = process.env.SECRET!
+    // console.log(secret)
+    // console.log(process.env.MONG!)
     try {
 
         const body = await request.json()
         const { username, password, email } = body
 
-
+console.log(body)
         if (!username || !password || !email) {
             return NextResponse.json({
                 msg: "Username, password, and email are required"
@@ -25,7 +27,7 @@ export async function POST(request: NextRequest) {
         if (user) {
             return NextResponse.json({
                 msg: "User already exists"
-            }, { status: 500 })
+            }, { status: 500 }) 
 
 
         } else {
