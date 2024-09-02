@@ -11,26 +11,35 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 export async function POST(request: NextRequest) {
     await connect();
     try {
-        const body = await request.json();
-        const { email, password } = body;
+        // Add logging to see if the body is received correctly
+        console.log("Received request:", request);
 
-        if (!email || !password) {
+        const body = await request.json();
+        console.log("Parsed JSON body:", body);
+
+        const { username, email, password } = body;
+
+        if (!username || !email || !password) {
             return NextResponse.json({
-                msg: "Email and password are required"
+                msg: "Username, Email, and password are required"
             }, { status: 400 });
         }
 
-        const user = await User.findOne({ email });
-        if (!user || !password) {
+        const user = await User.findOne({ username });
+        if (!user) {
             return NextResponse.json({
-                msg: "Invalid email or password"
+                msg: "Invalid username, email, or password"
+            }, { status: 401 });
+        } else if (user.password !== password) {
+            return NextResponse.json({
+                msg: "Invalid password"
             }, { status: 401 });
         }
 
         const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
 
         return NextResponse.json({
-            token
+            token, msg: "User login successful"
         });
 
     } catch (error) {

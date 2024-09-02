@@ -1,34 +1,29 @@
+import { Recipe } from '@repo/db';
+import { connect } from '@repo/db/lib/dbConnect';
+import { NextRequest, NextResponse } from 'next/server';
 
+export async function POST(req: NextRequest, res: NextResponse) {
+    await connect();
 
-import { Recipe } from '@repo/db'
-import { connect } from '@repo/db/lib/dbConnect'
-import { NextRequest, NextResponse } from 'next/server'
-import authenticate from '../../../middleware'
+    try {
+        const body = await req.json()
+        console.log(body)
+        const { title, description, ingredients, steps, category } = body;
 
-
-export default async function POST(req: NextRequest, res: NextResponse) {
-    await connect()
-    const { authenticated, user, message } = authenticate(req)
-    if (!authenticate) {
-        return NextResponse.json({ message }, { status: 401 })
-    } else {
-
-        try {
-            const { title, description, ingredients, steps, category } = await req.json()
-
-            const recipe = new Recipe({ title, description, ingredients, steps, category, user });
-
-            await recipe.save()
-
-            console.log(recipe)
-            return NextResponse.json({ message: 'recipe added successfully', recipeId: recipe._id })
-
-        } catch (err: any) {
-            console.log("Something went wrong")
-            console.log(err)
-            return NextResponse.json({ err: err.message }, { status: 500 })
+        // Assume the user ID is extracted by the middleware and passed in the request headers
+        const userId = req.headers.get('user-id');
+        if (!userId) {
+            return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
         }
 
-    }
+        const recipe = new Recipe({ title, description, ingredients, steps, category, user: userId });
 
+        await recipe.save();
+
+        return NextResponse.json({ message: 'Recipe added successfully', recipeId: recipe._id });
+
+    } catch (err: any) {
+        console.error('Something went wrong:', err);
+        return NextResponse.json({ err: err.message }, { status: 500 });
+    }
 }
