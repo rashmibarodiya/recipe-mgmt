@@ -11,13 +11,13 @@ export default async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
 
     // Skip authentication for signup and signin routes
-    if (pathname.startsWith('/api/signup') || pathname.startsWith('/api/signin')) {
+    if (pathname.startsWith('/api/auth')||pathname.startsWith('/api/signup') || pathname.startsWith('/api/signin')) {
         return NextResponse.next();
     }
 
     const authHeader = req.headers.get('authorization');
     if (!authHeader) {
-        return NextResponse.json({ msg: 'No token provided' }, { status: 401 });
+        return NextResponse.json({ msg: 'No token provided hhhhhhhhhhhhhh' }, { status: 401 });
     }
 
     const token = authHeader.replace('Bearer ', '');
