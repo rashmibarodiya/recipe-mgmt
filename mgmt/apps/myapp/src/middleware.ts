@@ -15,29 +15,29 @@ export default async function middleware(req: NextRequest) {
         return NextResponse.next();
     }
 
-    const authHeader = req.headers.get('authorization');
-    if (!authHeader) {
-        return NextResponse.json({ msg: 'No token provided hhhhhhhhhhhhhh' }, { status: 401 });
-    }
+//     const authHeader = req.headers.get('authorization');
+//     if (!authHeader) {
+//         return NextResponse.json({ msg: 'No token provided hhhhhhhhhhhhhh' }, { status: 401 });
+//     }
 
-    const token = authHeader.replace('Bearer ', '');
-    try {
-        const { payload } = await jwtVerify(token, new TextEncoder().encode(JWT_SECRET));
-        console.log("decoded", payload);
+//     const token = authHeader.replace('Bearer ', '');
+//     try {
+//         const { payload } = await jwtVerify(token, new TextEncoder().encode(JWT_SECRET));
+//         console.log("decoded", payload);
 
-        // Clone the request headers and attach the user ID
-        const headers = new Headers(req.headers);
-        headers.set('user-id', payload.sub as string);
+//         // Clone the request headers and attach the user ID
+//         const headers = new Headers(req.headers);
+//         headers.set('user-id', payload.sub as string);
 
-        // Create a new NextResponse object with updated headers
-        return NextResponse.next({ request: { headers } });
+//         // Create a new NextResponse object with updated headers
+//         return NextResponse.next({ request: { headers } });
 
-    } catch (err) {
-        console.log("middleware catch error ");
-        console.log(err);
-        return NextResponse.json({ msg: 'Invalid or expired token' }, { status: 401 });
-    }
-}
+//     } catch (err) {
+//         console.log("middleware catch error ");
+//         console.log(err);
+//         return NextResponse.json({ msg: 'Invalid or expired token' }, { status: 401 });
+//     }
+ }
 
 export const config = {
     matcher: ['/api/:path*'], // Apply middleware to all API routes except those explicitly excluded

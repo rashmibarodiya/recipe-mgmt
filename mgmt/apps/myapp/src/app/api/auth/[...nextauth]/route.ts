@@ -47,14 +47,15 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     async redirect({ url, baseUrl }) {
-      console.log("Redirect callback called " +url);
+//base url will be retrieved from .env so please define base url as NEXTAUTH_URL in .env with base url of your project
+      console.log("Redirect callback called " +baseUrl); 
       return baseUrl;
     },
     async session({ session, user, token }) {
       console.log("Session callback called");
       return session;
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user, account, profile }) {
       console.log("JWT callback called");
       return token;
     },
