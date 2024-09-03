@@ -41,6 +41,9 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages:{
+    signIn:'auth/signin'
+  },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       console.log("Sign In callback called");
