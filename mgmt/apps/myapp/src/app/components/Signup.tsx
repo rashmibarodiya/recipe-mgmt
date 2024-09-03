@@ -6,7 +6,7 @@ export default function Signup() {
   const { data: session } = useSession();
   console.error("signup " +session);
   return (
-    <div style={{ height: 60, background: "black", padding: 10 }}>
+    <div style={{ height: 60, background: "white", padding: 10 }}>
       {session ? (
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           

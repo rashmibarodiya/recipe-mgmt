@@ -1,15 +1,8 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { NextResponse } from "next/server";
-
-interface User {
-  id: string;
-  email: string;
-  name?: string;
-}
-
-//google credential from google cloud
+import { User } from "@repo/db";
+import {connect} from "@repo/db/lib/dbConnect"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -23,9 +16,11 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         username: { label: "Username", type: "text", placeholder: "username" },
         password: { label: "Password", type: "password" },
-        email : {label: "Email", type : "text", placeholder:"email"}
+        email: { label: "Email", type: "text", placeholder: "email" }
       },
       async authorize(credentials) {
+        await connect();
+        console.log("#########################################################################33")
         console.log("Authorize function called");
 
         if (!credentials) {
@@ -33,25 +28,70 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const { username, password } = credentials;
-        console.log("Credentials received:", { username, password });
+        const { username, password,email } = credentials;
+        console.log("Credentials received:", { username, password,email});
 
-        console.log("Authentication successful");
-        return { id: "1", email: username };
+        try {
+          const user = await User.findOne({ username });
+
+          if (user && password == user.password) { // Use bcrypt for password comparison
+            console.log("Authentication successful");
+            return { id: user._id.toString(), email: user.email };
+          }
+          if(!user){
+            const newUser = new User({
+              username,password,email
+            });
+            await newUser.save();
+            console.log("New user created in the database:", newUser);
+          }
+
+          console.log("Invalid credentials");
+          return null;
+        } catch (error) {
+          console.error("Error during authentication:", error);
+          return null;
+        }
       },
     }),
   ],
-  pages:{
-    signIn:'auth/signin'
+  pages: {
+    signIn: '/auth/signin', // Ensure this is the correct path to your custom sign-in page
   },
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account, profile }) {
+      await connect()
       console.log("Sign In callback called");
+      if (!account) {
+        console.log("no account found")
+        return false
+      }
+      if (account.provider === 'google') {
+        try {
+          const existingUser = await User.findOne({ email: user.email });
+
+          if (!existingUser) {
+            const newUser = new User({
+              email: user.email,
+              username: user.name,
+            });
+            await newUser.save();
+            console.log("New user created in the database:", newUser);
+          } else {
+            console.log("User already exists in the database:", existingUser);
+          }
+
+          return true;
+        } catch (error) {
+          console.error("Error during user sign-in:", error);
+          return false;
+        }
+      }
+
       return true;
     },
     async redirect({ url, baseUrl }) {
-//base url will be retrieved from .env so please define base url as NEXTAUTH_URL in .env with base url of your project
-      console.log("Redirect callback called " +baseUrl); 
+      console.log("Redirect callback called with base URL:", baseUrl);
       return baseUrl;
     },
     async session({ session, user, token }) {
@@ -69,7 +109,6 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
 };
-
 
 const handler = NextAuth(authOptions);
 
