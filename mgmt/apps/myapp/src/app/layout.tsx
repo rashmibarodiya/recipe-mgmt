@@ -21,9 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <header>
-            {/* <Signup /> */}
-          </header>
+          {/* <header>
+            <Signup />
+          </header> */}
           {children}
         </Providers>
       </body>

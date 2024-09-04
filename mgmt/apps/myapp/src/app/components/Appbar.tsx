@@ -8,7 +8,8 @@ export default function Appbar() {
   const router = useRouter();
 
   return (
-    <div style={{ height: 60, background: "white", padding: 10, boxShadow: "0px 4px 2px -2px gray" }}>
+    // <div style={{ height: 60, background: "white", padding: 10, boxShadow: "0px 4px 2px -2px gray" }}>
+    <div style={{ height: 60, padding: 40 }}>
       {session ? (
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ fontWeight: "bold" }}>

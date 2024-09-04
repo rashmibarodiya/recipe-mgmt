@@ -9,6 +9,7 @@ export default function SignInPage() {
   const [credentials, setCredentials] = useState({ username: "", password: "", email: "" });
   const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null);
   const router = useRouter();
+  const img = "https://www.shutterstock.com/image-photo/food-background-spices-herbs-utensil-260nw-2254302831.jpg";
 
   useEffect(() => {
     async function fetchProviders() {
@@ -40,6 +41,20 @@ export default function SignInPage() {
   };
 
   return (
+
+    <div
+        style={{
+          margin: 0,
+          padding: 0,
+          height: '100vh',
+          width: '100vw',
+          backgroundImage: `url(${img})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          overflow: 'hidden' // Prevents any overflow
+        }}
+      >
     <div style={{ display: "flex", minHeight: "10vh", marginTop: 100 }}>
       <div style={{ minWidth: "10vw" }}></div>
       <div style={{ flex: 1, backgroundColor: "#aec8b0", minWidth: "25vw", padding: "2rem" }}>
@@ -100,6 +115,7 @@ export default function SignInPage() {
         </p>
       </div>
       <div style={{ minWidth: "10vw" }}></div>
+    </div>
     </div>
   );
 }

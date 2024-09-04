@@ -37,7 +37,7 @@ export const authOptions: NextAuthOptions = {
           if (user && password == user.password) { // Use bcrypt for password comparison
             console.log("Authentication successful");
             console.log(user.username)
-            return user;
+            return { id: user._id.toString(), email: user.email, name: user.username };
           }
           if(!user){
             const newUser = new User({
@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
             });
             await newUser.save();
             console.log("New user created in the database:", newUser);
-            return newUser;
+            return { id: newUser._id.toString(), email: newUser.email, name: newUser.username };
           }
 
          else{
