@@ -55,19 +55,23 @@ export default function SignInPage() {
           overflow: 'hidden' // Prevents any overflow
         }}
       >
-    <div style={{ display: "flex", minHeight: "10vh", marginTop: 100 }}>
-      <div style={{ minWidth: "10vw" }}></div>
-      <div style={{ flex: 1, backgroundColor: "#aec8b0", minWidth: "25vw", padding: "2rem" }}>
+    <div style={{ display: "flex", minHeight: "20vh", marginTop: 100 }}>
+      <div style={{ minWidth: "30vw" }}></div>
+      {/* <div style={{ flex: 1, backgroundColor: "#aec8b0", minWidth: "25vw", padding: "2rem" }}>
         <img src="/bird-illustration.png" alt="Bird" style={{ width: "80%" }} />
         <p style={{ color: "#5b6e5d", marginTop: "1rem" }}>
           Maecenas mattis egestas
         </p>
-      </div>
-      <div style={{ flex: 1, padding: "2rem", minWidth: "25vw", backgroundColor: "#f4f4f4" }}>
-        <h1>Welcome to recipes</h1>
+      </div> */}
+      {/* <div style={{ flex: 1, padding: "2rem", minWidth: "25vw", backgroundColor: "#f4f4f4" }}> */}
+      <div style={{flex: 1, padding: "2rem", minWidth: "25vw", backgroundColor: "white"}}>
+        <center>
+        <h1>Welcome to Recipes!!</h1>
+        
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
+          
+         Username :  <input className="flex justify-center"
+         type="text"
             name="username"
             placeholder="Username"
             value={credentials.username}
@@ -75,7 +79,7 @@ export default function SignInPage() {
             required
           />
           <br/>
-          <input
+          Password : <input
             type="password"
             name="password"
             placeholder="Password"
@@ -84,7 +88,7 @@ export default function SignInPage() {
             required
           />
           <br/>
-          <input
+          Email :    <input
             type="email"
             name="email"
             placeholder="Email"
@@ -93,10 +97,11 @@ export default function SignInPage() {
             required
           />
           <br/>
-          
-          <button type="submit">Sign In</button>
+          <br/>
+         
+          <button type="submit" style={{ backgroundColor: "blue", color: "white", border: "none", padding: "8px 16px", borderRadius: "4px" }}>Sign In</button>
         </form>
-
+        </center>
         <div style={{ marginTop: "1rem" }}>
           {providers && 
             Object.values(providers).map((provider) => (
@@ -114,8 +119,9 @@ export default function SignInPage() {
           New to recipes? <a href="/auth/signup">Create Account</a>
         </p>
       </div>
-      <div style={{ minWidth: "10vw" }}></div>
+      <div style={{ minWidth: "30vw" }}></div>
     </div>
     </div>
   );
 }
+
