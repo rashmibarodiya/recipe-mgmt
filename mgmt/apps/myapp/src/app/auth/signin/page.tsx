@@ -1,11 +1,43 @@
-import { getProviders, getCsrfToken } from "next-auth/react";
-import { SignInButton } from "../../../component/SignInButton";
+'use client'
 
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { signIn, getProviders, ClientSafeProvider } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { SignInButton } from "../../../component/SignInButton"; // Adjust the path as needed
 
-export default async function SignInPage() {
-  const providers = await getProviders();
-  const csrfToken = await getCsrfToken();
+export default function SignInPage() {
+  const [credentials, setCredentials] = useState({ username: "", password: "", email: "" });
+  const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    async function fetchProviders() {
+      const fetchedProviders = await getProviders();
+      setProviders(fetchedProviders);
+    }
+    fetchProviders();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const res = await signIn("credentials", {
+      redirect: false,
+      username: credentials.username,
+      password: credentials.password,
+      email: credentials.email,
+    });
+
+    if (res?.ok) {
+      router.push("/");
+    } else {
+      console.error("Sign in failed", res?.error);
+    }
+  };
 
   return (
     <div style={{ display: "flex", minHeight: "10vh", marginTop: 100 }}>
@@ -18,27 +50,40 @@ export default async function SignInPage() {
       </div>
       <div style={{ flex: 1, padding: "2rem", minWidth: "25vw", backgroundColor: "#f4f4f4" }}>
         <h1>Welcome to recipes</h1>
-        <form method="post" action="/api/auth/callback/credentials">
-  <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-  <label>
-    Username
-    <input name="username" type="text" required />
-  </label>
-  <br />
-  <label>
-    Password
-    <input name="password" type="password" required />
-  </label>
-  <br />
-  <label>
-    Email
-    <input name="email" type="email" required />
-  </label>
-  <button type="submit">Sign in</button>
-</form>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={credentials.username}
+            onChange={handleChange}
+            required
+          />
+          <br/>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={credentials.password}
+            onChange={handleChange}
+            required
+          />
+          <br/>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={credentials.email}
+            onChange={handleChange}
+            required
+          />
+          <br/>
+          
+          <button type="submit">Sign In</button>
+        </form>
 
         <div style={{ marginTop: "1rem" }}>
-          {providers &&
+          {providers && 
             Object.values(providers).map((provider) => (
               <div key={provider.name}>
                 <SignInButton
@@ -46,7 +91,8 @@ export default async function SignInPage() {
                   providerName={provider.name}
                 />
               </div>
-            ))}
+            ))
+          }
         </div>
 
         <p style={{ marginTop: "1rem" }}>

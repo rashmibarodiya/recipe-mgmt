@@ -27,7 +27,7 @@ export const authOptions: NextAuthOptions = {
           console.log("No credentials provided");
           return null;
         }
-
+        console.log("Credentials:", credentials);
         const { username, password,email } = credentials;
         console.log("Credentials received:", { username, password,email});
 
@@ -36,7 +36,8 @@ export const authOptions: NextAuthOptions = {
 
           if (user && password == user.password) { // Use bcrypt for password comparison
             console.log("Authentication successful");
-            return { id: user._id.toString(), email: user.email };
+            console.log(user.username)
+            return user;
           }
           if(!user){
             const newUser = new User({
@@ -44,10 +45,13 @@ export const authOptions: NextAuthOptions = {
             });
             await newUser.save();
             console.log("New user created in the database:", newUser);
+            return newUser;
           }
 
+         else{
           console.log("Invalid credentials");
           return null;
+         }
         } catch (error) {
           console.error("Error during authentication:", error);
           return null;
@@ -91,6 +95,7 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     async redirect({ url, baseUrl }) {
+      
       console.log("Redirect callback called with base URL:", baseUrl);
       return baseUrl;
     },
