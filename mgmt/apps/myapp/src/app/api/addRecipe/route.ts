@@ -1,10 +1,10 @@
-import { Recipe } from '@repo/db';
+import { Recipe ,User } from '@repo/db';
 import { connect } from '@repo/db/lib/dbConnect';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest, res: NextResponse) {
     await connect();
-
+console.log("aaya hu")
     try {
         const body = await req.json()
         console.log(body)
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         const recipe = new Recipe({ title, description, ingredients, steps, category, user: userId });
 
         await recipe.save();
-
+console.log("recipe saved ")
         return NextResponse.json({ message: 'Recipe added successfully', recipeId: recipe._id });
 
     } catch (err: any) {

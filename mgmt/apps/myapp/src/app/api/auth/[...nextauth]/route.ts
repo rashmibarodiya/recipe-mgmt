@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { User } from "@repo/db";
 import {connect} from "@repo/db/lib/dbConnect"
+import { Console } from "console";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -66,6 +67,7 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account, profile }) {
       await connect()
       console.log("Sign In callback called");
+      
       if (!account) {
         console.log("no account found")
         return false
@@ -97,16 +99,38 @@ export const authOptions: NextAuthOptions = {
     async redirect({ url, baseUrl }) {
       
       console.log("Redirect callback called with base URL:", baseUrl);
+      console.log(process.env.NEXTAUTH_SECRET??"")
       return baseUrl;
     },
-    async session({ session, user, token }) {
+    async session({ session, token }) {
       console.log("Session callback called");
+      console.log("Session:", session);
+      console.log("Token:", token);
+    
+      // Ensure that user data is included in session
+      if (token) {
+        session.user = {
+          name: token.name || "",
+          email: token.email || "",
+        };
+      }
+    
       return session;
     },
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user }) {
       console.log("JWT callback called");
+      console.log("User:", user);
+      console.log("Token:", token);
+    
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+      }
+      console.log("Token:", token);
       return token;
-    },
+    }
+    ,
   },
   secret: process.env.NEXTAUTH_SECRET ?? "",
   session: {

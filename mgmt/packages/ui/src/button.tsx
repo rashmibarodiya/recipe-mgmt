@@ -21,6 +21,7 @@ export const Button = ({
     <button
       type={type}
       style={{
+        tabSize: "4",
         backgroundColor: color,
         color: "white",
         border: "none",
