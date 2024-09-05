@@ -2,7 +2,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-
+import {Button} from "@repo/ui/button"
 interface SignInButtonProps {
   providerId: string;
   providerName: string;
@@ -10,8 +10,8 @@ interface SignInButtonProps {
 
 export function SignInButton({ providerId, providerName }: SignInButtonProps) {
   return (
-    <button onClick={() => signIn(providerId)}>
+    <Button onClick={() => signIn(providerId)}>
       Sign in with {providerName}
-    </button>
+    </Button>
   );
 }

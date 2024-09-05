@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
-import Providers from "./components/Providers"
-import Signup from "./components/Appbar"
+import Providers from "./components/Providers";
+import Signup from "./components/Appbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,18 +14,34 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const img = "https://www.shutterstock.com/image-photo/food-background-spices-herbs-utensil-260nw-2254302831.jpg";
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers>
-          {/* <header>
-            <Signup />
-          </header> */}
-          {children}
-        </Providers>
+        <div
+          style={{
+            margin: 0,
+            padding: 0,
+            height: '100vh',
+            width: '100vw',
+            backgroundImage: `url(${img})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            overflow: 'hidden' // Prevents any overflow
+          }}
+        >
+          <Providers>
+            {/* <header>
+              <Signup />
+            </header> */}
+            {children}
+          </Providers>
+        </div>
       </body>
     </html>
   );
