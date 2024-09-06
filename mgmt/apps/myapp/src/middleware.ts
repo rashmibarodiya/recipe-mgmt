@@ -18,6 +18,8 @@ export default async function middleware(req: NextRequest) {
 
     // Extract token from cookies
    // const token = req.cookies.get('next-auth.session-token') || req.cookies.get('next-auth.csrf-token');
+   console.log("*************************")
+   console.log(req.cookies)
    const token = req.cookies.get('__Secure-next-auth.session-token');
 
  // if (!session) {
