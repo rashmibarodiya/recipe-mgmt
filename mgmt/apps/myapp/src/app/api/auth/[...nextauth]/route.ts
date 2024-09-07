@@ -102,6 +102,20 @@ export const authOptions: NextAuthOptions = {
       console.log(process.env.NEXTAUTH_SECRET??"")
       return baseUrl;
     },
+    async jwt({ token, user,account }) {
+      console.log("JWT callback called");
+      console.log("User:", user);
+      console.log("Token:", token);
+      console.log("Account: ",account)
+    
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+      }
+      console.log("Token:", token);
+      return token;
+    },
     async session({ session, token }) {
       console.log("Session callback called");
       console.log("Session:", session);
@@ -117,20 +131,8 @@ export const authOptions: NextAuthOptions = {
     
       return session;
     },
-    async jwt({ token, user }) {
-      console.log("JWT callback called");
-      console.log("User:", user);
-      console.log("Token:", token);
     
-      if (user) {
-        token.id = user.id;
-        token.email = user.email;
-        token.name = user.name;
-      }
-      console.log("Token:", token);
-      return token;
-    }
-    ,
+    
   },
   secret: process.env.NEXTAUTH_SECRET ?? "",
   session: {
