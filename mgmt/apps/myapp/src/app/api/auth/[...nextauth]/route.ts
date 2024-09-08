@@ -1,11 +1,11 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, User as NextAuthUser, Account, Profile, Session } from "next-auth";
+import { JWT } from "next-auth/jwt";  
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { User } from "@repo/db";
-import {connect} from "@repo/db/lib/dbConnect"
-import { Console } from "console";
+import { connect } from "@repo/db/lib/dbConnect";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
@@ -17,42 +17,33 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         username: { label: "Username", type: "text", placeholder: "username" },
         password: { label: "Password", type: "password" },
-        email: { label: "Email", type: "text", placeholder: "email" }
+        email: { label: "Email", type: "text", placeholder: "email" },
       },
       async authorize(credentials) {
         await connect();
-        console.log("#########################################################################33")
         console.log("Authorize function called");
 
         if (!credentials) {
           console.log("No credentials provided");
           return null;
         }
-        console.log("Credentials:", credentials);
-        const { username, password,email } = credentials;
-        console.log("Credentials received:", { username, password,email});
 
+        const { username, password, email } = credentials;
         try {
           const user = await User.findOne({ username });
 
-          if (user && password == user.password) { // Use bcrypt for password comparison
+          if (user && password === user.password) {
             console.log("Authentication successful");
-            console.log(user.username)
             return { id: user._id.toString(), email: user.email, name: user.username };
-          }
-          if(!user){
-            const newUser = new User({
-              username,password,email
-            });
+          } else if (!user) {
+            const newUser = new User({ username, password, email });
             await newUser.save();
-            console.log("New user created in the database:", newUser);
+            console.log("New user created:", newUser);
             return { id: newUser._id.toString(), email: newUser.email, name: newUser.username };
+          } else {
+            console.log("Invalid credentials");
+            return null;
           }
-
-         else{
-          console.log("Invalid credentials");
-          return null;
-         }
         } catch (error) {
           console.error("Error during authentication:", error);
           return null;
@@ -61,83 +52,65 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: '/auth/signin', // Ensure this is the correct path to your custom sign-in page
+    signIn: "/auth/signin",
   },
   callbacks: {
-    async signIn({ user, account, profile }) {
-      await connect()
+    async signIn({ user, account, profile }: { user: NextAuthUser; account: Account | null; profile?: Profile }) {
+      await connect();
       console.log("Sign In callback called");
-      
+  
       if (!account) {
-        console.log("no account found")
-        return false
+        console.log("Account is null");
+        return false;
       }
-      if (account.provider === 'google') {
+  
+      if (account.provider === "google") {
         try {
           const existingUser = await User.findOne({ email: user.email });
-
+          console.log("existing user",existingUser)
           if (!existingUser) {
-            const newUser = new User({
-              email: user.email,
-              username: user.name,
-            });
+            const newUser = new User({ email: user.email, username: user.name });
             await newUser.save();
-            console.log("New user created in the database:", newUser);
-          } else {
-            console.log("User already exists in the database:", existingUser);
+            console.log("New user created:", newUser);
           }
-
           return true;
         } catch (error) {
-          console.error("Error during user sign-in:", error);
+          console.error("Error during sign-in:", error);
           return false;
         }
       }
-
+  
       return true;
     },
     async redirect({ url, baseUrl }) {
-      
-      console.log("Redirect callback called with base URL:", baseUrl);
-      console.log(process.env.NEXTAUTH_SECRET??"")
+      console.log("redirect url ",baseUrl)
+
       return baseUrl;
-    },
-    async jwt({ token, user,account }) {
-      console.log("JWT callback called");
-      console.log("User:", user);
-      console.log("Token:", token);
-      console.log("Account: ",account)
-    
+    },  
+    async jwt({ token, user }: { token: JWT; user?: NextAuthUser }) {
+      console.log("user jwt ",user)
+      console.log("token jwt ",token)
       if (user) {
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
       }
-      console.log("Token:", token);
       return token;
     },
-    async session({ session, token }) {
-      console.log("Session callback called");
-      console.log("Session:", session);
-      console.log("Token:", token);
-    
-      // Ensure that user data is included in session
+    async session({ session, token }: { session: Session; token: JWT }) {
+      console.log("session session",session)
+      console.log("session token ",token)
       if (token) {
-        session.user = {
-          name: token.name || "",
-          email: token.email || "",
-        };
+
+        session.user = { name: token.name || "", email: token.email || "" };
       }
-    
       return session;
     },
-    
-    
   },
   secret: process.env.NEXTAUTH_SECRET ?? "",
   session: {
     strategy: "jwt",
-    maxAge:  60 * 60, //1h
+    maxAge: 60 * 60,
   },
 };
 

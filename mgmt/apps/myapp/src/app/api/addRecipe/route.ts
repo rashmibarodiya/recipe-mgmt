@@ -1,30 +1,41 @@
-import { Recipe ,User } from '@repo/db';
+import { Recipe, User } from '@repo/db';
 import { connect } from '@repo/db/lib/dbConnect';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: NextRequest, res: NextResponse) {
-    await connect();
-console.log("kya hjgh aaya hu")
+export async function POST(req: NextRequest) {
+    await connect(); 
+
+    console.log("Received request to add recipe");
+
     try {
-        const body = await req.json()
-        console.log(body)
+        const body = await req.json();
+        console.log("Request body:", body);
+
         const { title, description, ingredients, steps, category } = body;
 
-        // Assume the user ID is extracted by the middleware and passed in the request headers
-        // const userId = req.headers.get('user-id');
-        // if (!userId) {
-        //     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
-        // }
+        // Extract the user ID from the request headers
+        const userId = req.headers.get('user-id');
+        if (!userId) {
+            return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+        }
 
-        // const recipe = new Recipe({ title, description, ingredients, steps, category, user: userId });
+        
+        const recipe = new Recipe({
+            title,
+            description,
+            ingredients,
+            steps,
+            category,
+            user: userId,
+        });
 
-        // await recipe.save();
-console.log("recipe saved ")
-      //  return NextResponse.json({ message: 'Recipe added successfully', recipeId: recipe._id });
-        return NextResponse.json({ message: 'Recipe added successfully', recipeId: 4 });
+        // Save the recipe to the database
+        await recipe.save();
+        console.log("Recipe saved successfully");
 
-    } catch (err: any) {
-        console.error('Something went wrong:', err);
-        return NextResponse.json({ err: err.message }, { status: 500 });
+        return NextResponse.json({ message: 'Recipe added successfully', recipeId: recipe._id });
+    } catch (err :any) {
+        console.error('Error while adding recipe:', err);
+        return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }
