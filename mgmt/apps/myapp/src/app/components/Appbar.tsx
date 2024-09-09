@@ -2,7 +2,7 @@
 
 import { signIn, useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-
+import { Button } from "@repo/ui/button";
 export default function Appbar() {
   const { data: session } = useSession();
   const router = useRouter();
@@ -13,9 +13,16 @@ export default function Appbar() {
       {session ? (
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ fontWeight: "bold" }}>
-            Welcome, {session.user?.name }
+            Welcome, {session.user?.name}
           </div>
-          <button 
+          <div style={{ fontWeight: "bold" }}>
+            <Button color="orange" onClick={() => { router.push("/addRecipe") }}>Add Recipe</Button>
+          </div>
+          <div style={{ fontWeight: "bold" }}>
+            <Button color="orange" onClick={() => { router.push("/getUserRecipe") }}>MyRecipes</Button>
+          </div>
+          <button
+
             style={{ backgroundColor: "#f56c6c", color: "white", border: "none", padding: "8px 16px", borderRadius: "4px" }}
             onClick={() => {
               signOut({ callbackUrl: "/" });
@@ -30,7 +37,7 @@ export default function Appbar() {
           <div style={{ fontWeight: "bold" }}>
             Coursera
           </div>
-          <button 
+          <button
             style={{ backgroundColor: "#4caf50", color: "white", border: "none", padding: "8px 16px", borderRadius: "4px" }}
             onClick={() => signIn()}
           >

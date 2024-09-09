@@ -1,37 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { jwtVerify } from 'jose';
+import { getToken } from 'next-auth/jwt';
+import { User } from '@repo/db';
 
 const secret = process.env.NEXTAUTH_SECRET!;
 
 export default async function middleware(req: NextRequest) {
-    const { pathname } = req.nextUrl;
-console.log("pathname",pathname)
-    console.log("Request Cookies:", req.cookies);
-
-    // Extract the token from the cookies
-    const sessionTokenCookieName = '__Secure-next-auth.session-token';
-    const tokenCookie = req.cookies.get(sessionTokenCookieName);
-
-    if (!tokenCookie) {
-        console.log("No token provided");
-        return NextResponse.redirect(new URL('/api/auth/signin', req.url));
-    }
-
-    const token = tokenCookie.value; 
+    //const { pathname } = req.nextUrl;
+   // console.log("pathname", pathname);
+   // console.log("Request Cookies:", req.cookies);
 
     try {
-        // Verify the token
-        const { payload } = await jwtVerify(token, new TextEncoder().encode(secret));
-        console.log("Payload:", payload);
+        // Use next-auth's getToken to verify the token
+        const token = await getToken({ req, secret });
 
-        // Attach userId to the request for further use
-        req.nextUrl.searchParams.set('userId', payload.sub as string);
+        if (!token) {
+            console.log("No token provided");
+            return NextResponse.redirect(new URL('/api/auth/signin', req.url));
+        }
+
+        console.log("Token Payload:", token);
+        console.log("hi ha")
+console.log(token.sub as string)
+
+        // Set the userId in the headers
+        const response = NextResponse.next();
+        response.headers.set('email', token.email as string);
+        return response;
+
     } catch (error) {
         console.error("JWT verification failed:", error);
         return NextResponse.redirect(new URL('/api/auth/signin', req.url));
     }
-
-    return NextResponse.next();
 }
 
 export const config = {

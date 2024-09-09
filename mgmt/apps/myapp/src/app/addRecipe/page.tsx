@@ -20,7 +20,7 @@ const AddRecipe = () => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        
+
         const recipeData = {
             title,
             description: des,
@@ -39,14 +39,16 @@ const AddRecipe = () => {
             });
 
             const data = await response.json();
-            console.log('Response:', data);
+            console.log('Response:', JSON.stringify(data));
+            alert(JSON.stringify(data))
         } catch (error) {
             console.error('Error submitting recipe:', error);
+            alert(error)
         }
     };
 
-      // Add ingredient and step handling functions here
-      const handleIngChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+    // Add ingredient and step handling functions here
+    const handleIngChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         const newIngs = [...ings];
         newIngs[index] = { ...newIngs[index], ing: value };
@@ -86,8 +88,9 @@ const AddRecipe = () => {
 
             <div style={{ flex: 1, padding: "2rem", minWidth: "25vw", backgroundColor: "white" }}>
                 <form onSubmit={handleSubmit}>
+                    <div  className='grid grid-cols-2 gap-4 place-content-center h-48'>
                     <h2>Add New Recipe</h2>
-
+                    </div>
                     <div>
                         <label>
                             Title:
@@ -144,9 +147,11 @@ const AddRecipe = () => {
                                 )}
                             </div>
                         ))}
-                        <Button type="button" onClick={addIng} className="add-step-btn">
-                            Add Ingredient
-                        </Button>
+                        <div style = {{marginLeft : "25"}}>
+                            <Button type="button" onClick={addIng} className="add-step-btn">
+                                Add Ingredient
+                            </Button>
+                        </div>
                     </div>
                     <br />
                     <div>
@@ -184,5 +189,5 @@ const AddRecipe = () => {
         </div>
     );
 }
-  
+
 export default AddRecipe;
