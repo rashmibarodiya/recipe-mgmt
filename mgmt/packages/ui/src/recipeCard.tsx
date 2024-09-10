@@ -2,18 +2,18 @@ import React from 'react';
 
 
 export interface Recipe {
-    title: string;
-    description: string;
-    ingredients: string[];
-    steps: string[];
-    category: {
-        type: string;
-        enum: ['Dessert', 'Chinese', 'Italian', 'Beverages'];
-        required: true;
-    };
-    feedback?: string[];
-    ratings?: number;
-    author: string;
+  title: string;
+  description: string;
+  ingredients: string[];
+  steps: string[];
+  category: {
+    type: string;
+    enum: ['Dessert', 'Chinese', 'Italian', 'Beverages'];
+    required: true;
+  };
+  feedback?: string[];
+  ratings?: number;
+  author: string;
 }
 
 interface RecipeDisplayProps {
@@ -22,7 +22,7 @@ interface RecipeDisplayProps {
 
 const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe }) => {
   return (
-    <div>
+    <div className='max-w-md mx-auto bg-white  rounded-xl shadow-md overflow-hidden md:max-w-2xl'>
       <div><h3>{recipe.title}</h3></div>
       <div><h3>{recipe.description}</h3></div>
       <div>Category: {recipe.category.type}</div>

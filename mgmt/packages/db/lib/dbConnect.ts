@@ -1,29 +1,32 @@
+import mongoose from 'mongoose';
 
-
-import mongoose from 'mongoose'
+let isConnected = false; // Global flag to track the connection state
 
 export async function connect() {
-    try {
-        const mongId = process.env.MONG!
-        //console.log(mongId)
+  if (isConnected) {
+    console.log('Mongoose already connected');
+    return;
+  }
 
-        await mongoose.connect(mongId, {
-            dbName: 'recipes'
-        })
-        const connection = mongoose.connection
+  try {
+    const mongId = process.env.MONG!;
 
-        connection.on('connected', () => {
-            console.log('Mongoose connection established');
+    await mongoose.connect(mongId, {
+      dbName: 'recipes',
+    });
 
+    const connection = mongoose.connection;
 
-            connection.on('error', (err) => {
-                console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err);
-                process.exit();
-            });
-        })
-    } catch (e) {
-        console.log('Something went wrong!');
-        //   console.log(err);
-        console.error("error occured " + e)
-    }
+    connection.once('connected', () => {
+      console.log('Mongoose connection established');
+      isConnected = true; // Mark as connected
+    });
+
+    connection.on('error', (err) => {
+      console.log('MongoDB connection error. Please make sure MongoDB is running. ' + err);
+      process.exit();
+    });
+  } catch (e) {
+    console.error('Error occurred while connecting to MongoDB:', e);
+  }
 }
