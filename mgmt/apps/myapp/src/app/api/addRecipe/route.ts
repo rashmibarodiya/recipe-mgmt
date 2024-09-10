@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
         console.log("Request body:", body);
 
-        const { title, description, ingredients, steps, category } = body;
+        const { title, description, ingredients, steps, category,image } = body;
 
     
         const email = req.headers.get('email');
@@ -33,6 +33,7 @@ export async function POST(req: NextRequest) {
         const recipe = new Recipe({
             title,
             description,
+            image,
             ingredients,
             steps,
             category,

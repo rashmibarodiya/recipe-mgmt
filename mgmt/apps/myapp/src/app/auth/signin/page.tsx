@@ -52,7 +52,7 @@ export default function SignInPage() {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        overflow: 'hidden' // Prevents any overflow
+        overflow: 'auto' // Prevents any overflow
       }}
     >
       <div style={{ display: "flex", minHeight: "20vh", marginTop: 100 }}>

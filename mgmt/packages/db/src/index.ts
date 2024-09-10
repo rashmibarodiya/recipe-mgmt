@@ -51,6 +51,10 @@ const recipeSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    image:{
+        type :String,
+        required:true
+    },
     ingredients: {
         type: [String],
         required: true
@@ -61,7 +65,7 @@ const recipeSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['Dessert', 'Chinese', 'Italian', 'Beverages'],
+        enum: ['Dessert', 'Chinese', 'Italian', 'Beverages','Other'],
         required: true
     },
     feedback: [{

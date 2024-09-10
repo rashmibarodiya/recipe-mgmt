@@ -32,7 +32,7 @@ export default function RootLayout({
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            overflow: 'hidden' // Prevents any overflow
+            overflow: 'auto' // Prevents any overflow
           }}
         >
           <Providers>
