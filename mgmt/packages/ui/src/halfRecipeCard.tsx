@@ -1,8 +1,9 @@
 import React from 'react';
 import { Recipe, RecipeDisplayProps } from './recipeCard';  // Adjust the import as necessary
 
-const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe }) => {
+const RecipeCard: React.FC<RecipeDisplayProps> = ({ recipe }) => {
   // Calculate the average rating
+console.log(recipe)
   const avgRating = (ratings?: number[]): number => {
     if (!ratings || ratings.length === 0) return 0;
     const totalRating = ratings.reduce((acc, rating) => acc + rating, 0);
@@ -30,7 +31,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe }) => {
   return (
     <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-auto md:max-w-2xl p-6 space-y-4">
       <div>
-        <img src={recipe.img} alt={recipe.title} className="w-full h-48 object-cover rounded-t-lg" />
+        <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover rounded-t-lg" />
       </div>
       <div>
         <h3 className="text-2xl font-semibold text-gray-800">{recipe.title}</h3>
@@ -81,4 +82,4 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe }) => {
   );
 };
 
-export default RecipeDisplay;
+export default RecipeCard;
