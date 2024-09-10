@@ -1,10 +1,9 @@
 import { User } from "@repo/db";
 import { NextRequest, NextResponse } from "next/server"
-
 import { connect } from "@repo/db/lib/dbConnect"
 
-export default async function GET(req: NextRequest) {
-    
+export async function GET(req: NextRequest) {
+    console.log("i am herereee  eee")
     const email = req.headers.get('email');
     if (!email) {
         console.log("No email available");
@@ -13,21 +12,25 @@ export default async function GET(req: NextRequest) {
 
     try {
         await connect();
-        const user = await User.findOne({ email })
-        const recipes = user.recipes;
-        if (!recipes) {
+
+        // Find the user by email and populate the 'recipes' field with actual recipe data
+        const user = await User.findOne({ email }).populate('recipes');
+        console.log(user)
+        if (!user || !user.recipes || user.recipes.length === 0) {
+
             return NextResponse.json({
-                msg: "No recipes exists for this user"
-            })
-        } else {
-            return NextResponse.json({
-                msg: "recipes retrieved successfully",
-                recipes
-            })
+                msg: "No recipes exist for this user"
+            });
         }
+
+        console.log("recipes retrieved successfully", user.recipes);
+
+        return NextResponse.json({
+            msg: "Recipes retrieved successfully",
+            recipes: user.recipes
+        });
     } catch (err: any) {
-        console.error('Error fetching user recipe:', err);
+        console.error('Error fetching user recipes:', err);
         return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
     }
-
 }

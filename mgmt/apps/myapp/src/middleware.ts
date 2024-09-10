@@ -20,11 +20,12 @@ export default async function middleware(req: NextRequest) {
 
         console.log("Token Payload:", token);
         console.log("hi ha")
-console.log(token.sub as string)
+//console.log(token.sub as string)
 
         // Set the userId in the headers
         const response = NextResponse.next();
         response.headers.set('email', token.email as string);
+
         return response;
 
     } catch (error) {
@@ -34,5 +35,5 @@ console.log(token.sub as string)
 }
 
 export const config = {
-    matcher: ['/api/addRecipe', '/api/otherProtectedRoute'], // Apply to protected routes
+    matcher: ['/api/addRecipe', '/api/getUserRecipe'], // Apply to protected routes
 };

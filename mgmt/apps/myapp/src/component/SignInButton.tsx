@@ -2,7 +2,8 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import {Button} from "@repo/ui/button"
+
+import {Button} from "@repo/ui/src/button"
 interface SignInButtonProps {
   providerId: string;
   providerName: string;

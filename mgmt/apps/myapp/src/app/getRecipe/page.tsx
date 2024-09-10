@@ -1,21 +1,9 @@
+'use client'
+
+
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {RecipeDisplay} from '@repo/ui/src/recipeCard';
-
-export interface Recipe {
-    title: string;
-    description: string;
-    ingredients: string[];
-    steps: string[];
-    category: {
-        type: string;
-        enum: ['Dessert', 'Chinese', 'Italian', 'Beverages'];
-        required: true;
-    };
-    feedback?: string[];
-    ratings?: number;
-    author: string;
-}
+import RecipeDisplay ,{Recipe} from '@repo/ui/src/recipeCard';
 
 export default function getRecipe() {
     const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -32,7 +20,7 @@ export default function getRecipe() {
         };
 
         fetchRecipe();
-    }, [id]); // Fetch new recipe whenever `id` changes
+    }, [id]); 
 
     return (
         <div>

@@ -42,8 +42,10 @@ export async function POST(req: NextRequest) {
 
         // Save the recipe to the database
         await recipe.save();
+      
+        user.recipes.push(recipe._id);  
+        await user.save();
         console.log("Recipe saved successfully");
-
         return NextResponse.json({ message: 'Recipe added successfully', recipeId: recipe._id });
     } catch (err: any) {
         console.error('Error while adding recipe:', err);

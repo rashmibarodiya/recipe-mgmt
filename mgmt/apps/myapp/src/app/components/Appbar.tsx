@@ -2,7 +2,7 @@
 
 import { signIn, useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Button } from "@repo/ui/button";
+import { Button } from "@repo/ui/src/button";
 export default function Appbar() {
   const { data: session } = useSession();
   const router = useRouter();

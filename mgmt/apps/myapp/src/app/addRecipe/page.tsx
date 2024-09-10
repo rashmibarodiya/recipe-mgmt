@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Button } from "@repo/ui/button";
+import { Button } from "@repo/ui/src/button";
 
 interface Step {
     step: string;
