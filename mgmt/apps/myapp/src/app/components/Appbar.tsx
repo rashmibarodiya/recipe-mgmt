@@ -7,15 +7,17 @@ import { userName } from "@repo/store/src/atom/username";
 import { useRecoilState } from "recoil";
 
 export default function Appbar() {
-  const [username] = useRecoilState(userName);
+  const { data: session } = useSession();
+  // const [username] = useRecoilState(userName);
   const router = useRouter();
 
   return (
-    <div className="h-16 px-10 shadow-lg flex items-center justify-between">
-      {username ? (
+    <div className="h-16 px-10  flex items-center text-black justify-between">
+      {/* //shadow-lg */}
+      {session  ? (
         <div className="flex items-center justify-between w-full">
           <div className="font-bold text-xl">
-            Welcome, {username}
+          Welcome, {session.user?.name}
           </div>
           <div className="space-x-4">
             <Button color="orange" onClick={() => router.push("/addRecipe")}>
@@ -36,8 +38,8 @@ export default function Appbar() {
           </div>
         </div>
       ) : (
-        <div className="flex items-center justify-between w-full">
-          <div className="font-bold text-xl">
+        <div className="flex items-center justify-between text-black w-full">
+          <div className="font-bold text-xl ">
             Coursera
           </div>
           <button

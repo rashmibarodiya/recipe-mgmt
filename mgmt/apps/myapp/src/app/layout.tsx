@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import Providers from "./components/Providers";
-import Signup from "./components/Appbar";
+import Appbar from "./components/Appbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,28 +17,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const img = "https://www.shutterstock.com/image-photo/food-background-spices-herbs-utensil-260nw-2254302831.jpg";
-
+  const img = "https://img.freepik.com/premium-photo/wooden-cutting-board-with-garlic-tomatoes-basil-peppercorns-cream-white-background_1222783-12511.jpg?w=1060"
+  //const img = "https://img.freepik.com/free-photo/ingredients-cabbage-carrot-pie-cabbage-carrots-eggs-flour-milk-butter-spices-white-background_127032-2819.jpg";
+  //const img = "https://img.freepik.com/free-photo/spices-tomatoes-near-spaghetti-garlic_23-2147849739.jpg?size=626&ext=jpg&ga=GA1.1.1791467760.1725986295&semt=ais_hybrid"
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} h-screen w-screen`}>
         <div
+          className="h-screen w-screen bg-cover bg-center overflow-auto"
           style={{
-            margin: 0,
-            padding: 0,
-            height: '100vh',
-            width: '100vw',
             backgroundImage: `url(${img})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            overflow: 'auto' // Prevents any overflow
           }}
         >
           <Providers>
-            {/* <header>
-              <Signup />
-            </header> */}
+          <Appbar />
             {children}
           </Providers>
         </div>

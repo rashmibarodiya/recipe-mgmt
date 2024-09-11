@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Recipe } from "@repo/ui/src/recipeCard";
-import RecipeCard from "@repo/ui/src/halfRecipeCard";
+import RecipeCard from "../components/RecipePreview";
 import { useRouter } from 'next/navigation'; 
 
 export default function GetUserRecipe() {
