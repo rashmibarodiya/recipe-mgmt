@@ -4,13 +4,13 @@ import React, { useState, useEffect } from "react";
 import { signIn, getProviders, ClientSafeProvider } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { SignInButton } from "../../../component/SignInButton"; 
-import { userName } from '@repo/store/src/atom/username';
-import { useSetRecoilState } from 'recoil';
+//import { userName } from '@repo/store/src/atom/username';
+//import { useSetRecoilState } from 'recoil';
 
 export default function SignInPage() {
   const [credentials, setCredentials] = useState({ username: "", password: "", email: "" });
   const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null);
-  const setUserName = useSetRecoilState(userName);
+  //const setUserName = useSetRecoilState(userName);
   const router = useRouter();
   const img = "https://www.shutterstock.com/image-photo/food-background-spices-herbs-utensil-260nw-2254302831.jpg";
 
@@ -37,7 +37,7 @@ export default function SignInPage() {
     });
 
     if (res?.ok) {
-      setUserName(credentials.username);
+    //  setUserName(credentials.username);
       router.push("/");
     } else {
       console.error("Sign in failed", res?.error);

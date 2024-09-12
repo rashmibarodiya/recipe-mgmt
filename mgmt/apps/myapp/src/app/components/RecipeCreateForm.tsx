@@ -121,6 +121,7 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
                                 <option value="Dessert">Dessert</option>
                                 <option value="Chinese">Chinese</option>
                                 <option value="Italian">Italian</option>
+                                <option value="Italian">Vegetarian</option>
                                 <option value="Beverages">Beverages</option>
                                 <option value="Other">Other</option>
                             </select>

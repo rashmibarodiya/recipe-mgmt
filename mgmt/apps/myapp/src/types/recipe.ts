@@ -5,7 +5,7 @@ export default interface Recipe {
     ingredients: string[];
     image: string;
     steps: string[];
-    category: 'Dessert' | 'Chinese' | 'Italian' | 'Beverages' | 'Other';
+    category: 'Dessert' | 'Chinese' | 'Italian' | 'Vegetarian' | 'Beverages' | 'Other';
     otherCategory?: string;
     feedback?: string[];
     ratings?: number[];
@@ -14,6 +14,6 @@ export default interface Recipe {
 
 export interface RecipeDisplayProps {
     recipe: Recipe;
-    author ?:string;
+    author?: string;
 }
 

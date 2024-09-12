@@ -1,8 +1,7 @@
-// app/admin/editRecipe/[id]/page.tsx
 "use client";
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import RecipeForm from '../../../components/RecipeCreateForm'; // Ensure the correct import here
+import RecipeForm from '../../../components/RecipeCreateForm'; 
 import axios from 'axios';
 import { RecipeFormProps } from '@/types/recipeForm';
 
@@ -17,6 +16,7 @@ const EditRecipe = () => {
         steps: [{ step: '' }],
         ingredients: [{ ing: '' }],
     });
+    const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
         const fetchRecipe = async () => {
@@ -33,9 +33,10 @@ const EditRecipe = () => {
                         steps: recipe.steps.map((step: string) => ({ step })),
                         ingredients: recipe.ingredients.map((ing: string) => ({ ing })),
                     });
-                    alert(JSON.stringify(initialValues))
                 } catch (error) {
                     console.error('Error fetching recipe:', error);
+                } finally {
+                    setLoading(false); // Set loading to false once data is fetched
                 }
             }
         };
@@ -44,19 +45,20 @@ const EditRecipe = () => {
 
     const handleSubmit = async (recipeData: any) => {
         try {
-            const response = await fetch(`/api/admin/updateRecipe/${id}`, {
-                method: 'PUT',
+            const response = await axios.put(`/api/admin/editRecipe/${id}`, recipeData, {
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(recipeData),
             });
-            const data = await response.json();
-            console.log('Response:', JSON.stringify(data));
+            console.log('Response:', response.data);
             alert('Recipe updated successfully!');
         } catch (error) {
             console.error('Error updating recipe:', error);
             alert('Failed to update recipe.');
         }
     };
+
+    if (loading) {
+        return <div>Loading...</div>; // Display a loading message or spinner
+    }
 
     return (
         <RecipeForm

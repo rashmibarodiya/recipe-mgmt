@@ -2,7 +2,7 @@ import { Recipe, User } from '@repo/db';
 import { connect } from '@repo/db/lib/dbConnect';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
     await connect();
 
     console.log("Received request to edit recipe");
