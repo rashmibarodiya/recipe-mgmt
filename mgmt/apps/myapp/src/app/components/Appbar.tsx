@@ -40,7 +40,7 @@ export default function Appbar() {
       ) : (
         <div className="flex items-center justify-between text-black w-full">
           <div className="font-bold text-xl ">
-            Coursera
+            Recpies
           </div>
           <button
             className="bg-green-500 text-white px-4 py-2 rounded-md"
