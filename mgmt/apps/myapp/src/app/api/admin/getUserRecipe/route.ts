@@ -27,7 +27,8 @@ export async function GET(req: NextRequest) {
 
         return NextResponse.json({
             msg: "Recipes retrieved successfully",
-            recipes: user.recipes
+            recipes: user.recipes,
+            author : user
         });
     } catch (err: any) {
         console.error('Error fetching user recipes:', err);

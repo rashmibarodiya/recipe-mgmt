@@ -20,10 +20,10 @@ export default function Appbar() {
           Welcome, {session.user?.name}
           </div>
           <div className="space-x-4">
-            <Button color="orange" onClick={() => router.push("/addRecipe")}>
+            <Button color="orange" onClick={() => router.push("/admin/addRecipe")}>
               Add Recipe
             </Button>
-            <Button color="orange" onClick={() => router.push("/getUserRecipe")}>
+            <Button color="orange" onClick={() => router.push("/admin/getUserRecipe")}>
               My Recipes
             </Button>
             <button

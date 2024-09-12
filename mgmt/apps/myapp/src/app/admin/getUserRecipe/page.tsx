@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Recipe } from "@repo/ui/src/recipeCard";
-import RecipeCard from "../components/RecipePreview";
+import RecipeCard from "../../components/halfRecipe";
 import { useRouter } from 'next/navigation'; 
 
 export default function GetUserRecipe() {
@@ -10,13 +10,13 @@ export default function GetUserRecipe() {
   const router = useRouter();
 
   const handleClick = (id: string) => {
-    router.push(`/getRecipe/${id}`);
+    router.push(`/admin/getRecipe/${id}`);
   }
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const res = await axios.get('/api/getUserRecipe');
+        const res = await axios.get('/api/admin/getUserRecipe');
         console.log("this is react", res.data);
         setRecipes(res.data.recipes);
       } catch (e) {

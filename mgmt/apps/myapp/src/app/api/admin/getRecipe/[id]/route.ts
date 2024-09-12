@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Recipe } from "@repo/db";
+import { Recipe, User } from "@repo/db";
 import { connect } from "@repo/db/lib/dbConnect";
 import { NextResponse } from 'next/server';
 
@@ -17,9 +17,9 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
       return NextResponse.json({ msg: "Recipe not found" }, { status: 404 });
     }
 
-
+    const user = await User.findById(recipe.author)
     return NextResponse.json({
-      recipe
+      recipe,user
     });
   } catch (err: any) {
     console.error('Error fetching recipe by ID:', err);
