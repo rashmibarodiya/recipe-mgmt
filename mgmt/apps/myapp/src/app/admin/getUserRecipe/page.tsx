@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Recipe } from "@repo/ui/src/recipeCard";
-import RecipeCard from "../../components/halfRecipe";
+import HalfRecipe from "../../components/halfRecipe";
 import { useRouter } from 'next/navigation'; 
 
 export default function GetUserRecipe() {
@@ -35,9 +35,9 @@ export default function GetUserRecipe() {
           <div
             key={index}
             className="p-4 cursor-pointer"
-            onClick={() => handleClick(recipe._id || '0')}
+          
           >
-            <RecipeCard recipe={recipe} />
+            <HalfRecipe recipe={recipe} />
           </div>
         ))}
       </div>

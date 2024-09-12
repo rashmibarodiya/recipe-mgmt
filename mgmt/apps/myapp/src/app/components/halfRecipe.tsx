@@ -1,9 +1,18 @@
 import React from 'react';
 import Recipe, { RecipeDisplayProps } from '../../types/recipe';  // Adjust the import as necessary
+import {Button} from "@repo/ui/src/button"
+import { useRouter } from "next/navigation";
 
-const RecipeCard: React.FC<RecipeDisplayProps> = ({ recipe }) => {
+
+const HalfRecipe: React.FC<RecipeDisplayProps> = ({ recipe,author }) => {
   // Calculate the average rating
-console.log(recipe)
+  console.log(recipe);
+  // const handleClick = (id: string) => {
+  //   router.push(`/admin/getRecipe/${id}`);
+  // }
+
+  const router = useRouter();
+
   const avgRating = (ratings?: number[]): number => {
     if (!ratings || ratings.length === 0) return 0;
     const totalRating = ratings.reduce((acc, rating) => acc + rating, 0);
@@ -25,11 +34,11 @@ console.log(recipe)
     return stars;
   };
 
-  
   const averageRating = avgRating(recipe.ratings);
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-auto md:max-w-2xl p-6 space-y-4">
+    <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-auto md:max-w-2xl p-6 space-y-4 "   >
+      {/* onClick={() => handleClick(recipe._id || '0')} */}
       <div>
         <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover rounded-t-lg" />
       </div>
@@ -37,36 +46,6 @@ console.log(recipe)
         <h3 className="text-2xl font-semibold text-gray-800">{recipe.title}</h3>
         <p className="text-sm text-gray-500">{recipe.description}</p>
       </div>
-      {/* <div>
-        <span className="font-bold text-gray-700">Category:</span> 
-        <span className="ml-2 text-gray-600">{recipe.category.type}</span>
-      </div> */}
-      {/* <div className="text-red-500">
-        <h4 className="text-lg font-medium">Ingredients:</h4>
-        <ul className="list-disc pl-5 space-y-1">
-          {recipe.ingredients.map((ing, index) => (
-            <li key={index} className="text-gray-600">{ing}</li>
-          ))}
-        </ul>
-      </div> */}
-      {/* <div>
-        <h4 className="text-lg font-medium text-gray-800">Steps:</h4>
-        <ol className="list-decimal pl-5 space-y-1">
-          {recipe.steps.map((step, index) => (
-            <li key={index} className="text-gray-600">{step}</li>
-          ))}
-        </ol>
-      </div> */}
-      {/* {recipe.feedback && (
-        <div>
-          <h4 className="text-lg font-medium text-gray-800">Feedback:</h4>
-          <ul className="list-disc pl-5 space-y-1">
-            {recipe.feedback.map((fb, index) => (
-              <li key={index} className="text-gray-600">{fb}</li>
-            ))}
-          </ul>
-        </div>
-      )} */}
       {recipe.ratings && (
         <div className="font-semibold text-gray-700 flex items-center">
           <span className="mr-2">Ratings:</span>
@@ -75,11 +54,20 @@ console.log(recipe)
         </div>
       )}
       <div className="text-gray-700">
-        <span className="font-bold">Author:</span> 
-        <span className="ml-2">{recipe.author}</span>
+        {/* Conditionally render the author or the Edit button */}
+        {author ? (
+          <>
+            <span className="font-bold">Author:</span> 
+            <span className="ml-2">{recipe.author}</span>
+          </>
+        ) : (
+          <Button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600" onClick={() => router.push(`/admin/editRecipe/${recipe._id}`)}>
+            Edit Recipe
+          </Button>
+        )}
       </div>
     </div>
   );
 };
 
-export default RecipeCard;
+export default HalfRecipe;

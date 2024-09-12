@@ -16,3 +16,4 @@ export interface RecipeDisplayProps {
     recipe: Recipe;
     author ?:string;
 }
+

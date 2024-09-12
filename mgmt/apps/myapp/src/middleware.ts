@@ -35,5 +35,5 @@ export default async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/api/admin/addRecipe', '/api/admin/getUserRecipe'], // Apply to protected routes
-};
+    matcher: ['/api/admin/:path*', ], 
+}
