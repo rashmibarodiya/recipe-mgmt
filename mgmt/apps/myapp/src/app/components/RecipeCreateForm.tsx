@@ -1,8 +1,9 @@
 // components/RecipeForm.tsx
 "use client";
 import React, { useState } from 'react';
-import { Button } from "@repo/ui/src/button";
+import { Button } from "./Button";
 import { RecipeFormProps, Step, Ing } from '@/types/recipeForm';
+import CustomDropdown from './CustomDropDown';
 
 const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
     const [title, setTitle] = useState(initialValues.title);
@@ -19,7 +20,7 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
             title,
             description: des,
             image: img,
-            category: category === 'Other' ? otherCategory : category,
+            category: category === '' ? otherCategory : category,
             ingredients: ings.map(i => i.ing),
             steps: steps.map(s => s.step),
         };
@@ -59,7 +60,7 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
     };
 
     return (
-        <div className="text-black max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:max-w-2xl pt-15 p-6 space-y-4">
+        <div className="text-black mt-50 max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:max-w-2xl pt-15 p-6 space-y-4">
             <form onSubmit={handleSubmit}>
                 <div className='ml-4 mr-4'>
                     <h2 className="text-2xl font-bold mb-4">
@@ -107,24 +108,15 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">
                             Category:
-                            <select
-                                value={category}
-                                onChange={(e) => {
-                                    setCategory(e.target.value);
-                                    if (e.target.value !== 'Other') {
+                            <CustomDropdown
+                                selected={category}
+                                setSelected={(value: string) => {
+                                    setCategory(value);
+                                    if (value !== 'Other') {
                                         setOtherCategory('');
                                     }
                                 }}
-                                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                            >
-                                <option value="">Select a category</option>
-                                <option value="Dessert">Dessert</option>
-                                <option value="Chinese">Chinese</option>
-                                <option value="Italian">Italian</option>
-                                <option value="Italian">Vegetarian</option>
-                                <option value="Beverages">Beverages</option>
-                                <option value="Other">Other</option>
-                            </select>
+                            />
                         </label>
                     </div>
 
@@ -155,13 +147,13 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
                                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                                 />
                                 {ings.length > 1 && (
-                                    <Button type="button" color="red" onClick={() => removeIng(index)} className="ml-2">
+                                    <Button type="button" color="red-300" onClick={() => removeIng(index)} className="ml-2">
                                         Remove
                                     </Button>
                                 )}
                             </div>
                         ))}
-                        <Button type="button" onClick={addIng} className="mt-2">
+                        <Button type="button" color='green' onClick={addIng} className="mt-2">
                             Add Ingredient
                         </Button>
                     </div>
@@ -184,12 +176,12 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
                                 )}
                             </div>
                         ))}
-                        <Button type="button" onClick={addStep} className="mt-2">
+                        <Button type="button" color='green' onClick={addStep} className="mt-2">
                             Add Step
                         </Button>
                     </div>
 
-                    <Button type="submit" className="w-full mt-4">
+                    <Button type="submit" color='green' className="w-full  mt-4">
                         {initialValues.title ? 'Update Recipe' : 'Submit Recipe'}
                     </Button>
                 </div>

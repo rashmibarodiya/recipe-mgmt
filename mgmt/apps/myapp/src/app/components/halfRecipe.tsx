@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 const HalfRecipe: React.FC<RecipeDisplayProps> = ({ recipe,author }) => {
   // Calculate the average rating
   console.log(recipe);
-  // const handleClick = (id: string) => {
-  //   router.push(`/admin/getRecipe/${id}`);
-  // }
+  const handleClick = (id: string) => {
+    router.push(`/admin/getRecipe/${id}`);
+  }
 
   const router = useRouter();
 
@@ -37,8 +37,8 @@ const HalfRecipe: React.FC<RecipeDisplayProps> = ({ recipe,author }) => {
   const averageRating = avgRating(recipe.ratings);
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-auto md:max-w-2xl p-6 space-y-4 "   >
-      {/* onClick={() => handleClick(recipe._id || '0')} */}
+    <div className="max-w-md mx-auto bg-orange-200 rounded-lg shadow-lg overflow-auto md:max-w-2xl p-6 space-y-4 "  onClick={() => handleClick(recipe._id || '0')}  >
+     
       <div>
         <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover rounded-t-lg" />
       </div>

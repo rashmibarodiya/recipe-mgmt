@@ -11,6 +11,7 @@ export default function GetUserRecipe() {
     const { category } = useParams();
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const router = useRouter();
+   // const img = "https://img.freepik.com/free-vector/hand-drawn-no-data-concept_52683-127823.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1726099200&semt=ais_hybrid"
 
     const handleClick = (id: string) => {
         router.push(`/admin/getRecipe/${id}`);

@@ -4,7 +4,7 @@ import Recipe, { RecipeDisplayProps } from '@/types/recipe';
 const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, author }) => {
     return (
         <div className='py-10'>
-            <div className="max-w-md mx-auto bg-white rounded-lg border-8 border-customRed
+            <div className="max-w-md mx-auto bg-gray-100  rounded-lg border-8 border-customRed
              overflow-auto md:max-w-2xl space-y-10 shadow-lg">
 
                 <div className="flex bg-customRed p-6 items-center">
@@ -25,7 +25,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, author }) => {
                 </div>
 
                 {/* Category */}
-                <div className="text-center">
+                <div className="text-center ">
                     <span className="font-bold text-xl text-customRed">Category:</span>
                     <span className="ml-2 text-gray-600">{recipe.category}</span>
                 </div>
@@ -35,7 +35,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, author }) => {
                     <h4 className="text-xl font-bold text-customRed">Ingredients:</h4>
                     <ul className="list-disc pl-5 space-y-1">
                         {recipe.ingredients.map((ing, index) => (
-                            <li key={index} className="text-gray-600">{ing}</li>
+                            <li key={index} className="text-gray-900">{ing}</li>
                         ))}
                     </ul>
                 </div>
@@ -45,7 +45,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, author }) => {
                     <h4 className="text-xl font-bold text-customRed">Steps:</h4>
                     <ol className="list-decimal pl-5 space-y-1">
                         {recipe.steps.map((step, index) => (
-                            <li key={index} className="text-gray-600">{step}</li>
+                            <li key={index} className="text-gray-900">{step}</li>
                         ))}
                     </ol>
                 </div>

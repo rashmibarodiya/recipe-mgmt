@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
             ingredients,
             steps,
             category,
+            authorName:user.username,
             author: user._id, 
         });
         console.log(recipe);
