@@ -5,30 +5,25 @@ import { ReactNode } from "react";
 interface ButtonProps {
   children: ReactNode;
   className?: string;
-  onClick: () => void; // Custom onClick function prop
-  type?: "button" | "submit" | "reset"; // Button type
-  color?: string; // Custom button color
+  onClick: () => void;
+  type?: "button" | "submit" | "reset";
+  color?: string;
 }
 
 export const Button = ({
   children,
   className,
   onClick,
-  type = "button", // Default type
-  color = "#ec7063" // Default color
+  type = "button", 
+  color
 }: ButtonProps) => {
   return (
     <button
       type={type}
       style={{
-        tabSize: "4",
-        backgroundColor: color,
-        color: "white",
-        border: "none",
-        padding: "8px 16px",
-        borderRadius: "4px"
+        backgroundColor: color || "#ec7063",
       }}
-      className={className}
+      className={`text-white border-none py-2 px-4 rounded-md hover:bg-opacity-75  transition-colors ${className}`}
       onClick={onClick}
     >
       {children}
