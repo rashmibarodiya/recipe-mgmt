@@ -30,7 +30,7 @@ export default function RootLayout({
           }}
         >
           <Providers>
-          {/* <Appbar /> */}
+          <Appbar />
             {children}
           </Providers>
         </div>
