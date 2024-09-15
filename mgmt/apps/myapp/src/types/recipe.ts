@@ -9,11 +9,13 @@ export default interface Recipe {
     otherCategory?: string;
     feedback?: string[];
     ratings?: number[];
+    authorName:string;
     author: string;
 }
 
 export interface RecipeDisplayProps {
     recipe: Recipe;
     author?: string;
+    mine: boolean
 }
 

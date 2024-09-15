@@ -3,7 +3,7 @@
 'use client';
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Recipe } from "@repo/ui/src/recipeCard";
+import  Recipe  from "../../../types/recipe";
 import HalfRecipe from "../../components/halfRecipe";
 import { useParams, useRouter } from 'next/navigation';
 
@@ -41,7 +41,7 @@ export default function GetUserRecipe() {
                         className="p-4 cursor-pointer"
 
                     >
-                        <HalfRecipe recipe={recipe} />
+                        <HalfRecipe recipe={recipe} mine  = {false} />
                     </div>
                 ))}
             </div>
