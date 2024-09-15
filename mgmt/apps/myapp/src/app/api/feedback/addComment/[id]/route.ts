@@ -30,11 +30,18 @@ export async function POST(req: NextRequest,{ params }: { params: { id: string }
         console.log("User found:", user);
 
         let recipe = await Recipe.findById(id);
+
+        console.log(recipe)
         if (!recipe) {
             console.log("Recipe not found");
             return NextResponse.json({ message: 'Recipe not found' }, { status: 404 });
         }else{
-            const feedback = new Feedback(review,user,recipe)
+            const feedback = new Feedback({
+                review: review,
+                user: user._id,
+                recipe: recipe._id
+            });
+    
             await feedback.save();
             return NextResponse.json({message: 'Review added'},{status : 200})
         }

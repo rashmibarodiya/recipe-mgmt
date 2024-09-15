@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Recipe, { RecipeDisplayProps } from '@/types/recipe';
+import axios from 'axios';
 
 const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, mine }) => {
-    return (
-        <div className='py-10'>
-            <div className="max-w-md mx-auto bg-gray-100  rounded-lg border-8 border-customRed
-             overflow-auto md:max-w-2xl space-y-10 shadow-lg">
+    const id = recipe._id;
+    const [review, setReview] = useState("");
 
+    const handleSubmit = async () => {
+        try {
+            const res = await axios.post(`/api/feedback/addComment/${id}`, {
+                review: review
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            console.log(res.data.message);
+            alert(res.data.message)
+        } catch (e) {
+            console.error("Request failed", e);
+            alert(e);
+        }
+    };
+
+    return (
+        <div className="py-10">
+            <div className="max-w-md mx-auto bg-gray-100 rounded-lg border-8 border-customRed overflow-auto md:max-w-2xl space-y-10 shadow-lg">
                 <div className="flex bg-customRed p-6 items-center">
                     {/* Image as a Circle */}
                     <div className="flex-shrink-0">
@@ -25,7 +44,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, mine }) => {
                 </div>
 
                 {/* Category */}
-                <div className="text-center ">
+                <div className="text-center">
                     <span className="font-bold text-xl text-customRed">Category:</span>
                     <span className="ml-2 text-gray-600">{recipe.category}</span>
                 </div>
@@ -59,9 +78,27 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, mine }) => {
                 )}
             </div>
 
-            <div className="mt-10 text-center text-gray-700">
-                Add a comment here
-            </div>
+            {!mine && (
+                <div>
+                    <div className="mt-10 ml-80 text-2xl text-gray-700">
+                        Comments:
+                    </div>
+                    <div className="flex justify-center mt-4">
+                        <input
+                            type="text"
+                            placeholder="Add a comment here"
+                            onChange={(e) => setReview(e.target.value)}
+                            className="w-full max-w-md px-4 py-2 text-black border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                        <button
+                            className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
+                            onClick={handleSubmit}
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

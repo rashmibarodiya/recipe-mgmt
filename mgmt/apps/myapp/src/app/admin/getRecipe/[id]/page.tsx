@@ -1,18 +1,18 @@
 'use client';
 import { useParams } from 'next/navigation'; // Use this for dynamic params in App Router
 import { useEffect, useState } from 'react';
+import {useSession} from 'next-auth/react'
 import RecipeDisplay from '../../../components/fullRecipeCard';
 import Recipe from '@/types/recipe';
 import axios from 'axios';
 
-interface fullRecipeProp{
-    mine : boolean
-}
 
-const RecipeDetailPage = ({mine} : fullRecipeProp) => {
+
+const RecipeDetailPage = () => {
+    const {data:session} = useSession()
     const { id } = useParams(); 
     const [recipe, setRecipe] = useState<Recipe | null>(null);
-    const [author, setAuthor] = useState("")
+    const [mine, setMine] =useState(false)
 
     useEffect(() => {
         const fetchRecipe = async () => {
@@ -20,7 +20,9 @@ const RecipeDetailPage = ({mine} : fullRecipeProp) => {
                 try {
                     const res = await axios.get(`/api/admin/getRecipe/${id}`); // Fetch recipe by ID
                     setRecipe(res.data.recipe);
-                    setAuthor(res.data.author.username)
+                    if(session?.user?.name == res.data.authorName){
+                        setMine(true)
+                    }
                     console.log(JSON.stringify(res.data.recipe))
                   //  alert(JSON.stringify(res.data.recipe))
                 } catch (error) {
