@@ -5,7 +5,11 @@ import RecipeDisplay from '../../../components/fullRecipeCard';
 import Recipe from '@/types/recipe';
 import axios from 'axios';
 
-const RecipeDetailPage = () => {
+interface fullRecipeProp{
+    mine : boolean
+}
+
+const RecipeDetailPage = ({mine} : fullRecipeProp) => {
     const { id } = useParams(); 
     const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [author, setAuthor] = useState("")
@@ -34,7 +38,7 @@ const RecipeDetailPage = () => {
         <div >
             {/* <div className='text-black'>  f djfdjgfdhf {recipe.category.type}ghdkjfhdkjf</div> */}
           
-            <RecipeDisplay recipe={recipe}></RecipeDisplay>
+            <RecipeDisplay recipe={recipe} mine = {mine}></RecipeDisplay>
         </div>
     );
 };

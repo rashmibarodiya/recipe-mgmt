@@ -1,7 +1,7 @@
 import React from 'react';
 import Recipe, { RecipeDisplayProps } from '@/types/recipe';
 
-const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, author }) => {
+const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, mine }) => {
     return (
         <div className='py-10'>
             <div className="max-w-md mx-auto bg-gray-100  rounded-lg border-8 border-customRed
@@ -51,10 +51,10 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, author }) => {
                 </div>
 
                 {/* Conditionally render Author */}
-                {author && (
+                {!mine && (
                     <div className="text-center text-gray-700">
                         <span className="font-bold text-customRed">Author:</span>
-                        <span className="ml-2">{author}</span>
+                        <span className="ml-2">{recipe.authorName}</span>
                     </div>
                 )}
             </div>
