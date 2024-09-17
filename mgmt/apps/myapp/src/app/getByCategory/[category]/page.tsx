@@ -41,7 +41,7 @@ export default function GetUserRecipe() {
                         className="p-4 cursor-pointer"
 
                     >
-                        <HalfRecipe recipe={recipe} mine  = {false} />
+                        <HalfRecipe recipe={recipe} mine  = {false} id={recipe._id ||""} />
                     </div>
                 ))}
             </div>

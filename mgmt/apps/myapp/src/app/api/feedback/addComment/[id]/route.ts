@@ -39,10 +39,12 @@ export async function POST(req: NextRequest,{ params }: { params: { id: string }
             const feedback = new Feedback({
                 review: review,
                 user: user._id,
-                recipe: recipe._id
-            });
-    
-            await feedback.save();
+                recipe: recipe._id,
+              });
+          
+              await feedback.save();            
+              recipe.feedback.push(feedback._id); 
+              await recipe.save(); 
             return NextResponse.json({message: 'Review added'},{status : 200})
         }
     }catch(e){

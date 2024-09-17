@@ -10,13 +10,13 @@ export default function GetUserRecipe() {
   const router = useRouter();
 
   const handleClick = (id: string) => {
-    router.push(`/admin/getRecipe/${id}`);
+    router.push(`/getRecipe/${id}`);
   }
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const res = await axios.get('/api/admin/getUserRecipe');
+        const res = await axios.get('/api/getUserRecipe');
         console.log("this is react", res.data);
         setRecipes(res.data.recipes);
       } catch (e) {
@@ -37,7 +37,7 @@ export default function GetUserRecipe() {
             className="p-4 cursor-pointer"
           
           >
-            <HalfRecipe recipe={recipe} id = {recipe._id || ""} mine = {true} />
+            <HalfRecipe recipe={recipe} id={recipe._id||""} mine = {true} />
           </div>
         ))}
       </div>

@@ -16,6 +16,7 @@ export default interface Recipe {
 export interface RecipeDisplayProps {
     recipe: Recipe;
     author?: string;
-    mine: boolean
+     mine?: boolean;
+    id:string;
 }
 
