@@ -3,18 +3,22 @@
 import { signIn, useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@repo/ui/src/button";
-import { userName } from "@repo/store/src/atom/username";
-import { useRecoilState } from "recoil";
+// import { userName } from "@repo/store/src/atom/username";
+// import {  useRecoilState } from "recoil";
 
 export default function Appbar() {
   const { data: session } = useSession();
+  //const [username,setUsername] = useRecoilState(userName);
+  // if(session?.user?.name){
+  //   setUsername(session.user.name)
+  // }
   const router = useRouter();
 
   return (
     <div className="h-16 px-10 flex items-center text-black justify-between">
       {session ? (
         <div className="flex items-center justify-between w-full">
-          <div className="font-bold text-xl">Welcome, {session.user?.name}</div>
+          <div className="font-bold text-xl">Welcome, {session?.user?.name}</div>
           <div className="space-x-4">
             <Button
               color="orange"

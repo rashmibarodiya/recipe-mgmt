@@ -21,12 +21,14 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, mine, id}) => {
     // }
 
     const fetchFeedback = async () => {
+     console.log("idddd ",id)
+     console.log("mine " ,mine)
       if (id) {
         try {
            
-          const res = await axios.get(`/api/feedback/getComment/${id}`);
+          const res = await axios.get(`/api/getData/getComment/${id}`);
           setFeedbacks(res.data.reviews);
-          alert(JSON.stringify(res.data.reviews))
+          console.log("getting feedback ",JSON.stringify(res.data.reviews))
           setLoading(false);
         } catch (err) {
           console.error(err);
@@ -36,7 +38,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, mine, id}) => {
       }
     };
     fetchFeedback();
-  }, [id]);
+  }, [id,mine]);
 
   const handleSubmit = async () => {
     try {
@@ -51,7 +53,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, mine, id}) => {
           },
         }
       );
-      alert(res.data.message);
+      alert("addComment"+res.data.message);
       setReview("");
       // Re-fetch feedbacks after submitting a new review
       const feedbackRes = await axios.get(`/api/feedback/getComment/${id}`);
@@ -63,7 +65,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, mine, id}) => {
   };
 
   return (
-    <div className="py-10">
+    <div className="py-10 text-black">
       <div className="max-w-md mx-auto bg-gray-100 rounded-lg border-8 border-customRed overflow-auto md:max-w-2xl space-y-10 shadow-lg">
         <div className="flex bg-customRed p-6 items-center">
           <div className="flex-shrink-0">
@@ -148,6 +150,9 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, mine, id}) => {
           </div>
         </div>
       )}
+
+
+     
     </div>
   );
 };

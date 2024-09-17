@@ -21,31 +21,24 @@ const RecipeDetailPage = () => {
           const res = await axios.get(`/api/getRecipe/${id}`); // Fetch recipe by ID
           const fetchedRecipe = res.data.recipe;
 
-          console.log("Fetched recipe:", fetchedRecipe); // Log fetchedRecipe instead of state
           setRecipe(fetchedRecipe);
 
           // Check if the logged-in user is the author of the recipe
           if (session?.user?.name === res.data.authorName) {
             setMine(true);
           }
-            const userId = fetchedRecipe?.author; // Use fetchedRecipe instead of recipe
-            console.log("User ID:", userId);
+          console.log("mine fromm getRecipe page ",mine)
 
-            const res2 = await axios.get(
-              `/api/getData/getUserRecipe/${userId}`
-            );
-            setRecipes(res2.data.recipes);
-          
+          const userId = fetchedRecipe?.author;
+          const res2 = await axios.get(`/api/getData/getUserRecipe/${userId}`);
+          setRecipes(res2.data.recipes);
         } catch (error) {
           console.error("Error fetching recipe:", error);
         }
       }
     };
 
-
     fetchRecipe();
-    console.log(recipe)
-    console.log(recipes)
   }, [id, session]);
 
   if (!recipe) return <div className="text-black">Loading...</div>;
@@ -53,31 +46,22 @@ const RecipeDetailPage = () => {
   return (
     <div className="text-black">
       <div className="text-black"> Recipe ID: {id as string}</div>
-      fdhfkjdfhkdljfhdlkf{recipe.author}jhdfkjdlfhdkjfldk
-      {!mine && (
-        <div className="flex">
-          <div className="flex1">
-            <RecipeDisplay recipe={recipe} mine={mine} id={id as string} />
-          </div>
-          <div className="flex2">
-            {recipes?.map((recipe) => (
-              <div key={recipe._id}>
-                <HalfRecipe
-                  recipe={recipe}
-                  id={recipe._id || ""}
-                  mine={false}
-                />
-              </div>
-            ))}
-          </div>
+
+      {/* Render RecipeDisplay */}
+      <div className="flex1">
+        <RecipeDisplay recipe={recipe} mine={mine} id={id as string} />
+      </div>
+
+      {/* Conditionally render the recipes array if mine is false */}
+      {!mine && recipes && recipes.length > 0 && (
+        <div className="flex2">
+          {recipes.map((recipe) => (
+            <div key={recipe._id}>
+              <HalfRecipe recipe={recipe} id={recipe._id || ""} mine={false} />
+            </div>
+          ))}
         </div>
-      )}:{
-        <div className="flex">
-          <div className="flex1">
-            {/* <RecipeDisplay recipe={recipe} mine={mine} id={id as string} /> */}
-          </div>
-        </div>
-      }
+      )}
     </div>
   );
 };

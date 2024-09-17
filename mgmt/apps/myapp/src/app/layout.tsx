@@ -4,7 +4,7 @@ import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import Providers from "./components/Providers";
 import Appbar from "./components/Appbar";
-
+//  import { RecoilRoot } from "recoil"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -29,10 +29,12 @@ export default function RootLayout({
             backgroundImage: `url(${img})`,
           }}
         >
+           
           <Providers>
           <Appbar />
             {children}
           </Providers>
+      
         </div>
       </body>
     </html>
