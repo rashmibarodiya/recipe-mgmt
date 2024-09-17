@@ -20,6 +20,20 @@ export default function Appbar() {
         <div className="flex items-center justify-between w-full">
           <div className="font-bold text-xl">Welcome, {session?.user?.name}</div>
           <div className="space-x-4">
+          <Button
+              color="orange"
+              className="hover:bg-red-800 transition-colors duration-300"
+              onClick={() => router.push("/")}
+            >
+              Home
+            </Button>
+          <Button
+              color="orange"
+              className="hover:bg-red-800 transition-colors duration-300"
+              onClick={() => router.push("/explore")}
+            >
+              Explore
+            </Button>
             <Button
               color="orange"
               className="hover:bg-red-800 transition-colors duration-300"

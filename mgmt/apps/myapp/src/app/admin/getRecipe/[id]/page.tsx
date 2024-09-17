@@ -12,7 +12,7 @@ const RecipeDetailPage = () => {
   const [recipe, setRecipe] = useState<Recipe>();
   const { data: session } = useSession();
   const [mine, setMine] = useState(false);
-  const [recipes, setRecipes] = useState<Recipe[]>();
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -22,16 +22,17 @@ const RecipeDetailPage = () => {
           const fetchedRecipe = res.data.recipe;
 
           setRecipe(fetchedRecipe);
-
+          const userId = fetchedRecipe?.author;
           // Check if the logged-in user is the author of the recipe
           if (session?.user?.name === res.data.authorName) {
             setMine(true);
+          } else {
+            const res2 = await axios.get(
+              `/api/getData/getUserRecipe/${userId}`
+            );
+            setRecipes(res2.data.recipes);
           }
-          console.log("mine fromm getRecipe page ",mine)
-
-          const userId = fetchedRecipe?.author;
-          const res2 = await axios.get(`/api/getData/getUserRecipe/${userId}`);
-          setRecipes(res2.data.recipes);
+          console.log("mine from getRecipe page ", mine);
         } catch (error) {
           console.error("Error fetching recipe:", error);
         }
@@ -44,22 +45,27 @@ const RecipeDetailPage = () => {
   if (!recipe) return <div className="text-black">Loading...</div>;
 
   return (
-    <div className="text-black">
-      <div className="text-black"> Recipe ID: {id as string}</div>
+    <div className="text-black p-4 sm:p-6 lg:p-8">
+      <div className="text-lg font-semibold mb-4">Recipe ID: {id as string}</div>
 
       {/* Render RecipeDisplay */}
-      <div className="flex1">
-        <RecipeDisplay recipe={recipe} mine={mine} id={id as string} />
+      <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
+        <div className="flex-1">
+          <RecipeDisplay recipe={recipe} mine={mine} id={id as string} />
+        </div>
       </div>
 
       {/* Conditionally render the recipes array if mine is false */}
       {!mine && recipes && recipes.length > 0 && (
-        <div className="flex2">
-          {recipes.map((recipe) => (
-            <div key={recipe._id}>
-              <HalfRecipe recipe={recipe} id={recipe._id || ""} mine={false} />
-            </div>
-          ))}
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-4">More Recipes by {recipe?.authorName}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {recipes.map((recipe, index) => (
+              <div key={index} className="  shadow-md rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300">
+                <HalfRecipe recipe={recipe} mine={false} id={recipe._id || ""} />
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
