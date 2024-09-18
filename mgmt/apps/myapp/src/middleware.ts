@@ -30,7 +30,10 @@ export default async function middleware(req: NextRequest) {
 
     } catch (error) {
         console.error("JWT verification failed:", error);
-        return NextResponse.redirect(new URL('/api/auth/signin', req.url));
+        const signInUrl = new URL('/auth/signin', req.url);
+        signInUrl.searchParams.set('callbackUrl', req.url);
+
+        return NextResponse.redirect(signInUrl)
     }
 }
 
