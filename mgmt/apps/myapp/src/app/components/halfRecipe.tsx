@@ -3,44 +3,12 @@ import Recipe, { RecipeDisplayProps } from '../../types/recipe';  // Adjust the 
 import { Button } from "@repo/ui/src/button";
 import { useRouter } from "next/navigation";
 import axios from 'axios';
+import GetRating from './fullRecipe/GetRating';
+
 
 const HalfRecipe: React.FC<RecipeDisplayProps> = ({ recipe, mine }) => {
-  const [averageRating, setAverageRating] = useState<number>(0);
+ 
   const router = useRouter();
-
-  // Fetch average rating
-  useEffect(() => {
-    const fetchRating = async () => {
-      if (recipe._id) {
-        try {
-          const res = await axios.get(`/api/getData/getRating/${recipe._id}`);
-          setAverageRating(res.data.avgRating);
-          alert(res.data.avgRating)
-          console.log("this is average rating", res.data.avgRating)
-        } catch (error) {
-          alert(error)
-          console.error("Failed to fetch average rating", error);
-        }
-      }
-    };
-
-    fetchRating();
-  }, [recipe._id]);
-
-  // Generate star rating representation
-  const getStarRating = (rating: number) => {
-    const fullStar = '★';
-    const emptyStar = '☆';
-    const starCount = 5;
-    const roundedRating = Math.round(rating);
-
-    let stars = '';
-    for (let i = 1; i <= starCount; i++) {
-      stars += i <= roundedRating ? fullStar : emptyStar;
-    }
-
-    return stars;
-  };
 
   const handleClick = (id: string) => {
     router.push(`/admin/getRecipe/${id}`);
@@ -56,13 +24,7 @@ const HalfRecipe: React.FC<RecipeDisplayProps> = ({ recipe, mine }) => {
           <h3 className="text-2xl font-semibold text-gray-800">{recipe.title}</h3>
           <p className="text-sm text-orange-700 mt-1">{recipe.description}</p>
         </div>
-        {averageRating !== undefined && (
-          <div className="font-semibold text-gray-700 mt-2 flex items-center">
-            <span className="mr-2">Ratings:</span>
-            <span className="text-yellow-500">{getStarRating(averageRating)}</span>
-            <span className="ml-2 text-gray-600">({averageRating.toFixed(1)})</span>
-          </div>
-        )}
+        <GetRating recipe = {recipe}/>
       </div>
 
       <div className="text-gray-700">

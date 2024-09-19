@@ -42,15 +42,15 @@ const RecipeDetailPage = () => {
     fetchRecipe();
   }, [id, session]);
 
-  if (!recipe) return <div className="text-black">Loading...</div>;
+  if (!recipe) return <div className="flex text-2xl font-bold text-black justify-center">Loading...</div>;
 
   return (
     <div className="text-black p-4 sm:p-6 lg:p-8">
-      <div className="text-lg font-semibold mb-4">Recipe ID: {id as string}</div>
+      {/* <div className="text-lg font-semibold mb-4">Recipe ID: {id as string}</div> */}
 
       {/* Render RecipeDisplay */}
-      <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
-        <div className="flex-1">
+      <div className="flex justify-left ml-10">
+        <div className="">
           <RecipeDisplay recipe={recipe} mine={mine} id={id as string} />
         </div>
       </div>
