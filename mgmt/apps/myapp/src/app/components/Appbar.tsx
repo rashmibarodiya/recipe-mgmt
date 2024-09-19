@@ -2,52 +2,50 @@
 
 import { signIn, useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Button } from "@repo/ui/src/button";
-// import { userName } from "@repo/store/src/atom/username";
-// import {  useRecoilState } from "recoil";
+import { Button } from "./Button";
 
 export default function Appbar() {
   const { data: session } = useSession();
-  //const [username,setUsername] = useRecoilState(userName);
-  // if(session?.user?.name){
-  //   setUsername(session.user.name)
-  // }
   const router = useRouter();
 
   return (
-    <div className="h-16 px-10 flex items-center text-black justify-between">
+    <div className="h-16 px-10 flex items-center bg-white shadow-md text-black justify-between">
+      {/* <div className="font-bold text-xl text-customGold"></div> */}
       {session ? (
         <div className="flex items-center justify-between w-full">
-          <div className="font-bold text-xl">Welcome, {session?.user?.name}</div>
+          <div className="text-lg text-gray-900">Welcome, {session?.user?.name}</div>
           <div className="space-x-4">
-          <Button
+            <button
               color="orange"
-              className="hover:bg-red-800 transition-colors duration-300"
+              className="bg-orange-400 text-white font-semibold py-2 px-4 rounded-md shadow-lg hover:bg-red-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              // onClick={() => router.push("/")}
               onClick={() => router.push("/")}
             >
               Home
-            </Button>
-          <Button
+            </button>
+            <button
               color="orange"
-              className="hover:bg-red-800 transition-colors duration-300"
+              className="bg-orange-400 text-white font-semibold py-2 px-4 rounded-md shadow-lg hover:bg-red-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
               onClick={() => router.push("/explore")}
             >
               Explore
-            </Button>
-            <Button
+            </button>
+            <button
               color="orange"
-              className="hover:bg-red-800 transition-colors duration-300"
+              className="bg-orange-400 text-white font-semibold py-2 px-4 rounded-md shadow-lg hover:bg-red-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              
               onClick={() => router.push("/admin/addRecipe")}
             >
               Add Recipe
-            </Button>
-            <Button
+            </button>
+            <button
               color="orange"
-              className="hover:bg-orange-600 transition-colors duration-300"
+              className="bg-orange-400 text-white font-semibold py-2 px-4 rounded-md shadow-lg hover:bg-red-500 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              
               onClick={() => router.push("/admin/getUserRecipe")}
             >
               My Recipes
-            </Button>
+            </button>
             <button
               className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors duration-300"
               onClick={() => {
@@ -60,15 +58,12 @@ export default function Appbar() {
           </div>
         </div>
       ) : (
-        <div className="flex items-center justify-between text-black w-full">
-          <div className="font-bold text-xl">Recipes</div>
-          <button
-            className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300"
-            onClick={() => signIn()}
-          >
-            Sign In
-          </button>
-        </div>
+        <button
+          className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300"
+          onClick={() => signIn()}
+        >
+          Sign In
+        </button>
       )}
     </div>
   );

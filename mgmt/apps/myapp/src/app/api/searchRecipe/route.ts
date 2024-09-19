@@ -16,7 +16,11 @@ export async function GET(request: Request) {
     try {
         await connect();
       const results = await searchRecipesByQuery(query);
+      if(results.length > 0) {
       return NextResponse.json(results);
+      } else {
+        return NextResponse.json({ message: 'No results found'},{status:400});
+      }
     } catch (error) {
       console.error('Error searching recipes:', error);
       return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
@@ -26,7 +30,7 @@ export async function GET(request: Request) {
 
   
 async function searchRecipesByQuery(query: string) {
- 
+// console.log("hi its begining")
   // Full-text search
   const fullTextResults = await Recipe.find({
     $text: { $search: query },
@@ -47,6 +51,8 @@ async function searchRecipesByQuery(query: string) {
       ],
     })),
   }).exec();
+
+
 
   return regexResults;
 }

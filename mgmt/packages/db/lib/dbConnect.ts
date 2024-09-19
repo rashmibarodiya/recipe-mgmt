@@ -28,16 +28,7 @@ export async function connect() {
       
       try {
         
-        await Recipe.collection.createIndex(
-          {
-            title: 'text',
-            description: 'text',
-            ingredients: 'text'
-          },
-          {
-            weights: { title: 10, description: 5, ingredients: 1 }
-          }
-        );
+        await Recipe.createIndexes();
 
         console.log("Text indexes created successfully");
       } catch (indexError) {

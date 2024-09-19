@@ -26,13 +26,13 @@ const HalfRecipe: React.FC<RecipeDisplayProps> = ({ recipe, mine }) => {
           <img src={recipe.image} alt={recipe.title} className="w-full h-48 mb-4 object-cover rounded-t-lg" />
         </div>
         <div>
-          <h3 className="text-2xl font-semibold text-white">{recipe.title}</h3>
-          <p className="text-sm text-gray-100 mt-1">{truncateText(recipe.description, 10)}</p>
+          <h3 className="text-2xl font-semibold text-gray-600">{recipe.title}</h3>
+          <p className="text-sm text-gray-600 mt-1">{truncateText(recipe.description, 10)}</p>
         </div>  
         <GetRating recipe={recipe} />
       </div>
 
-      <div className="text-gray-100">
+      <div className="text-gray-600">
         {/* Conditionally render the author or the Edit button */}
         {!mine ? (
           <>

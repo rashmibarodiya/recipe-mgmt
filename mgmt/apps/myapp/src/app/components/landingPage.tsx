@@ -1,6 +1,11 @@
-import CategoryDisplay from "./Display";
 
+"use client"
+import CategoryDisplay from "./Display";
+import { signIn, useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 export default function LandingPage() {
+  const { data: session } = useSession();
+  const router = useRouter();
   const img =
     "https://media.istockphoto.com/id/1190330112/photo/fried-pork-and-vegetables-on-white-background.jpg?s=612x612&w=0&k=20&c=TzvLLGGvPAmxhKJ6fz91UGek-zLNNCh4iq7MVWLnFwo=";
   const italian =
@@ -26,8 +31,11 @@ export default function LandingPage() {
                 Whether you're a beginner or a master chef, you'll find
                 something delicious to try.
               </p>
-              <button className="bg-customGold text-gray-800 hover:bg-yellow-500 hover:text-gray-900 font-semibold py-2 px-4 rounded transition-colors duration-300">
-                Get Started
+              <button
+                onClick={() => (session ? router.push("/explore") : router.push("/signin"))}
+                className="bg-customGold text-gray-800 hover:bg-yellow-500 hover:text-gray-900 font-semibold py-2 px-4 rounded transition-colors duration-300"
+              >
+                {session ? "Explore" : "Get Started"}
               </button>
             </div>
             <div className="relative flex flex-col items-center mt-10 ml-20 justify-center w-2/5 p-10">

@@ -87,7 +87,8 @@ const recipeSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-
+//////////////////////////////////////////////////////////////////////
+recipeSchema.index({ title: 'text', description: 'text', ingredients: 'text' });
 
 //########################33feedback
 const feedbackSchema = new mongoose.Schema({
