@@ -59,16 +59,16 @@ const CommentService: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
 
   return (
     <div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-left ml-6  mt-6 md-2">
         <input
           type="text"
           placeholder="Add a comment here"
           value={review}
           onChange={(e) => setReview(e.target.value)}
-          className="w-full max-w-md px-4 py-2 text-black border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full max-w-md px-4 py-2 text-black border rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
         <button
-          className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
+          className="ml-4 px-4 py-2 bg-blue-500 shadow-lg text-white rounded-md hover:bg-blue-600 transition duration-300"
           onClick={handleSubmit}
         >
           Submit

@@ -53,6 +53,10 @@ const RecipeDetailPage = () => {
         <div className="">
           <RecipeDisplay recipe={recipe} mine={mine} id={id as string} />
         </div>
+
+
+
+
       </div>
 
       {/* Conditionally render the recipes array if mine is false */}

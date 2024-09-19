@@ -18,5 +18,6 @@ export interface RecipeDisplayProps {
     author?: string;
      mine?: boolean;
     id:string;
+    color?: string;
 }
 

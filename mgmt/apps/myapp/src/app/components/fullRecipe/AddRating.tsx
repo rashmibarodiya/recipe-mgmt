@@ -53,7 +53,7 @@ const AddRating: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
 
   return (
     <div className="text-center mt-8">
-      <h3 className="text-2xl text-gray-700 mb-4">Add a Rating:</h3>
+      <h3 className="text-2xl text-gray-700 mb-4">Add Rating:</h3>
       <div className="flex justify-center items-center space-x-4">
         <div className="flex">
           {[1, 2, 3, 4, 5].map((value) => (

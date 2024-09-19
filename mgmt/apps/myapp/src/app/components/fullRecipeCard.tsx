@@ -17,25 +17,22 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
 
   return (
     <div className="py-10 text-black">
-      <div className="max-w-3xl mx-auto bg-gray-100 rounded-lg border-8 border-customRed shadow-lg overflow-hidden">
-        <div className="flex flex-col md:flex-row items-center bg-customRed p-6">
-          {/* Recipe Image */}
+      {/* Main Card Container */}
+      <div className="max-w-3xl mx-auto rounded-lg border-4 border-gray-300 shadow-xl overflow-hidden">
+        {/* Recipe Image and Info */}
+        <div className="flex flex-col md:flex-row items-center bg-gradient-to-r from-red-500 via-red-400 to-red-500 p-6">
           <div className="flex-shrink-0">
             <img
               src={recipe.image}
               alt={recipe.title}
-              className="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-gray-300 object-cover"
+              className="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-white object-cover shadow-md"
             />
           </div>
-
-          {/* Recipe Info */}
           <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left w-full">
             <h3 className="text-3xl md:text-4xl font-bold text-white">
               {recipe.title}
             </h3>
-            <p className="text-lg text-gray-300 mt-2">{recipe.description}</p>
-
-            {/* Rating Component */}
+            <p className="text-lg text-white mt-2">{recipe.description}</p>
             <div className="mt-2">
               <GetRating recipe={recipe} />
             </div>
@@ -43,19 +40,19 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
         </div>
 
         {/* Recipe Details */}
-        <div className="px-8 py-6 bg-funchisa-100">
+        <div className="px-8 py-6 bg-white space-y-6">
           {/* Category */}
-          <div className="mb-4">
-            <span className="font-bold text-2xl text-customRed">Category:</span>
-            <span className="ml-2 text-xl font-medium">{recipe.category}</span>
+          <div className="w-full bg-gray-100 p-4 rounded-lg shadow-md">
+            <h4 className="text-xl font-semibold text-gray-700">Category:</h4>
+            <span className="ml-2 text-lg">{recipe.category}</span>
           </div>
 
           {/* Ingredients */}
-          <div className="mb-4">
-            <h4 className="text-2xl font-bold text-customRed">Ingredients:</h4>
-            <ul className="list-disc pl-5 space-y-1">
+          <div className="w-full bg-gray-100 p-4 rounded-lg shadow-md">
+            <h4 className="text-xl font-semibold text-gray-700">Ingredients:</h4>
+            <ul className="list-disc pl-5 mt-2">
               {recipe.ingredients.map((ing, index) => (
-                <li key={index} className="text-xl font-medium text-gray-800">
+                <li key={index} className="text-lg text-gray-600">
                   {ing}
                 </li>
               ))}
@@ -63,11 +60,11 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
           </div>
 
           {/* Steps */}
-          <div className="mb-4">
-            <h4 className="text-2xl font-bold text-customRed mb-2">Steps:</h4>
-            <ol className="list-decimal pl-5 space-y-1">
+          <div className="w-full bg-gray-100 p-4 rounded-lg shadow-md">
+            <h4 className="text-xl font-semibold text-gray-700">Steps:</h4>
+            <ol className="list-decimal pl-5 mt-2">
               {recipe.steps.map((step, index) => (
-                <li key={index} className="text-lg font-normal text-gray-700">
+                <li key={index} className="text-lg text-gray-600">
                   {step}
                 </li>
               ))}
@@ -76,11 +73,9 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
 
           {/* Author */}
           {!mine && (
-            <div className="text-right text-gray-700 mt-6">
-              <span className="font-bold text-lg text-customRed">Author:</span>
-              <span className="ml-2 text-lg font-semibold">
-                {recipe.authorName}
-              </span>
+            <div className="w-full bg-gray-100 p-4 rounded-lg shadow-md">
+              <span className="font-semibold text-lg text-gray-700">Author:</span>
+              <span className="ml-2 text-lg">{recipe.authorName}</span>
             </div>
           )}
         </div>
@@ -88,10 +83,10 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
 
       {/* Add Rating and Comments Section */}
       {!mine && (
-        <div className="mt-10">
+        <div className="mt-10 p-6 bg-gray-50 rounded-lg shadow-lg">
           <AddRating recipe={recipe} id={id} />
           <div className="mt-6">
-            <h4 className="text-2xl text-gray-700">Comments:</h4>
+            <h4 className="text-2xl ml-5 font-semibold text-gray-700">Comments:</h4>
             <CommentService recipe={recipe} id={id} />
           </div>
         </div>
