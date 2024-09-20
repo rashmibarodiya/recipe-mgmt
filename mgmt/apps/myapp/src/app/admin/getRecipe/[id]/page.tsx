@@ -13,6 +13,7 @@ const RecipeDetailPage = () => {
   const { data: session } = useSession();
   const [mine, setMine] = useState(false);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const[check,setCheck] = useState(false)
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -26,10 +27,12 @@ const RecipeDetailPage = () => {
           // Check if the logged-in user is the author of the recipe
           if (session?.user?.name === res.data.authorName) {
             setMine(true);
+            setCheck(true)
           } else {
             const res2 = await axios.get(
               `/api/getData/getUserRecipe/${userId}`
             );
+            setCheck(true)
             setRecipes(res2.data.recipes);
           }
           console.log("mine from getRecipe page ", mine);
@@ -38,9 +41,10 @@ const RecipeDetailPage = () => {
         }
       }
     };
+    console.log(check)
 
     fetchRecipe();
-  }, [id, session]);
+  }, [id,check, session]);
 
   if (!recipe) return <div className="flex text-2xl font-bold text-black justify-center">Loading...</div>;
 
@@ -60,9 +64,9 @@ const RecipeDetailPage = () => {
       </div>
 
       {/* Conditionally render the recipes array if mine is false */}
-      {!mine && recipes && recipes.length > 0 && (
+      {!mine &&check && recipes && recipes.length > 0  && (
         <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-4">More Recipes by {recipe?.authorName}</h2>
+          <h2 className="text-2xl font-bold mb-4">More Recipes byyyy {recipe?.authorName}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {recipes.map((recipe, index) => (
               <div key={index} className="  shadow-md rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300">

@@ -56,9 +56,12 @@ export default function LandingPage() {
         </div>
       </div>
 
-      <div className="text-2xl md:text-4xl font-bold text-center text-black bg-green-200 shadow-lg rounded-lg p-4 md:p-4 w-3/5 max-w-4xl mx-auto my-8">
-        Select by category
-      </div>
+      <div className="text-2xl md:text-4xl text-indigo-950 font-bold text-center text-white 
+      bg-gradient-to-r from-red-400 via-red-200 to-red-400 shadow-xl 
+      rounded-lg p-6 md:p-8 w-3/4 max-w-4xl mx-auto my-10 transform transition-transform hover:scale-105">
+  Select by Category
+</div>
+
 
       {/* Cards Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 md:p-14">

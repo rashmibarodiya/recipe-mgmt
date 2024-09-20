@@ -9,11 +9,13 @@ export default function Appbar() {
   const router = useRouter();
 
   return (
-    <div className="h-16 px-10 flex items-center bg-white shadow-md text-black justify-between">
+    <div className="h-16 px-10 flex items-center  shadow-md text-black justify-between">
       {/* <div className="font-bold text-xl text-customGold"></div> */}
       {session ? (
         <div className="flex items-center justify-between w-full">
-          <div className="text-lg text-gray-900">Welcome, {session?.user?.name}</div>
+          <div className="text-lg text-gray-900">
+            Welcome, {session?.user?.name}
+          </div>
           <div className="space-x-4">
             <button
               color="orange"
@@ -33,7 +35,6 @@ export default function Appbar() {
             <button
               color="orange"
               className="bg-orange-400 text-white font-semibold py-2 px-4 rounded-md shadow-lg hover:bg-red-800 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
-              
               onClick={() => router.push("/admin/addRecipe")}
             >
               Add Recipe
@@ -41,7 +42,6 @@ export default function Appbar() {
             <button
               color="orange"
               className="bg-orange-400 text-white font-semibold py-2 px-4 rounded-md shadow-lg hover:bg-red-500 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
-              
               onClick={() => router.push("/admin/getUserRecipe")}
             >
               My Recipes
@@ -58,12 +58,20 @@ export default function Appbar() {
           </div>
         </div>
       ) : (
-        <button
-          className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300"
-          onClick={() => signIn()}
-        >
-          Sign In
-        </button>
+        <div className="flex items-center justify-between w-full">
+          <div className="font-bold text-cyan-900 text-2xl">
+            RecipeWorld
+
+          </div>
+         
+          <button
+            className=" bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300"
+            onClick={() => signIn()}
+          >
+            Sign In
+          </button>
+      
+        </div>
       )}
     </div>
   );

@@ -8,10 +8,13 @@ import { useSession } from "next-auth/react";
 const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
   const { data: session } = useSession();
   const [mine, setMine] = useState(false);
+  // const[loading,setLoading] = useState(false);
 
   useEffect(() => {
+    // setLoading(true)
     if (session?.user?.name === recipe.authorName) {
       setMine(true);
+      // setLoading(false)
     }
   }, [session, recipe.authorName]);
 
@@ -72,7 +75,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
           </div>
 
           {/* Author */}
-          {!mine && (
+          {!mine  &&(
             <div className="w-full bg-gray-100 p-4 rounded-lg shadow-md">
               <span className="font-semibold text-lg text-gray-700">Author:</span>
               <span className="ml-2 text-lg">{recipe.authorName}</span>
@@ -82,7 +85,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
       </div>
 
       {/* Add Rating and Comments Section */}
-      {!mine && (
+      {!mine  &&(
         <div className="mt-10 p-6 bg-gray-50 rounded-lg shadow-lg">
           <AddRating recipe={recipe} id={id} />
           <div className="mt-6">
