@@ -13,7 +13,7 @@ export default function Appbar() {
       {/* <div className="font-bold text-xl text-customGold"></div> */}
       {session ? (
         <div className="flex items-center justify-between w-full">
-          <div className="text-lg text-gray-900">
+          <div className="text-lg font-bold text-gray-900">
             Welcome, {session?.user?.name}
           </div>
           <div className="space-x-4">

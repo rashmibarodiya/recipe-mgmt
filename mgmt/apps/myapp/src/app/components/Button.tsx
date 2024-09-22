@@ -1,30 +1,25 @@
-"use client";
+// components/Button.tsx
+import React from 'react';
 
-import { ReactNode } from "react";
-
-interface ButtonProps {
-  children: ReactNode;
+type ButtonProps = {
+  type: 'button' | 'submit' | 'reset';
+  color: 'green' | 'red';
+  onClick?: () => void;
   className?: string;
-  onClick: () => void;
-  type?: "button" | "submit" | "reset";
-  color?: string;
-}
+  children: React.ReactNode;
+};
 
-export const Button = ({
-  children,
-  className,
-  onClick,
-  type = "button", 
-  color
-}: ButtonProps) => {
+export const Button: React.FC<ButtonProps> = ({ type, color, onClick, className, children }) => {
+  const colorClasses =
+    color === 'green'
+      ? 'bg-green-700 text-white hover:bg-green-600'
+      : 'bg-red-700 text-white hover:bg-red-600';
+
   return (
     <button
       type={type}
-      style={{
-        backgroundColor: color || "#ec7063",
-      }}
-      className={`text-white border-none py-2 px-4 rounded-md hover:bg-opacity-75  transition-colors ${className}`}
       onClick={onClick}
+      className={`${colorClasses} font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 ${className}`}
     >
       {children}
     </button>

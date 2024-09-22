@@ -1,6 +1,6 @@
 // components/SignInButton.tsx
 "use client";
-
+import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { Button } from "@repo/ui/src/button";
 
@@ -10,25 +10,22 @@ interface SignInButtonProps {
 }
 
 export function SignInButton({ providerId, providerName }: SignInButtonProps) {
-  const img =
-    "https://img.freepik.com/free-psd/google-icon-isolated-3d-render-illustration_47987-9777.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1726617600&semt=ais_hybrid";
   return (
     <div>
-    <button
-      className="w-48 p-2 py-2 text-black rounded-md bg-transparent hover:bg-green-600 hover:text-white transition-colors duration-300 ease-in-out"
-      onClick={() => signIn(providerId)}
-    >
-      
-        <span>Sign in with {providerName}</span>
-      
-    </button>
-    <div className="flex items-center justify-center space-x-2">
-    {/* <img
-      src={img}
-      alt={providerName}
-      className="h-6 w-6 rounded-full"
-    /> */}
-    </div>
+      <button
+        className="w-64 p-2 py-2 text-black border-2 border-black rounded-lg bg-transparent hover:bg-green-600 hover:text-white transition-all duration-300 ease-in-out shadow-md hover:shadow-lg"
+        onClick={() => signIn(providerId)}
+      >
+        <div className="flex items-center justify-center space-x-2"> {/* Flexbox to align text and image inline */}
+          <Image
+            src="/google.svg"
+            alt="google logomark"
+            width={25}
+            height={25}
+          />
+          <span>Continue with {providerName}</span>
+        </div>
+      </button>
     </div>
   );
 }

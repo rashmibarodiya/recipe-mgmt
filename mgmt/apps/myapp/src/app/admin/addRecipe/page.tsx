@@ -4,6 +4,7 @@ import RecipeForm from '../../components/RecipeCreateForm';
 import { RecipeFormProps, Step, Ing } from '@/types/recipeForm';
 import axios from 'axios';
 const AddRecipe = () => {
+
     const handleSubmit = async (recipeData: any) => {
         try {
             const response = await axios.post(`/api/admin/addRecipe`, recipeData, {
@@ -18,7 +19,8 @@ const AddRecipe = () => {
     };
 
     return (
-        <RecipeForm
+        <div className='mt-50'>
+            <RecipeForm
             initialValues={{
                 title: '',
                 description: '',
@@ -29,7 +31,10 @@ const AddRecipe = () => {
                 ingredients: [{ ing: '' }],
             }}
             onSubmit={handleSubmit}
-        />
+            ></RecipeForm>
+        </div>
+        
+      
     );
 };
 

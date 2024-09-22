@@ -9,7 +9,6 @@ export default function SignInPage() {
   const [credentials, setCredentials] = useState({ username: '', password: '', email: '' });
   const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null);
   const router = useRouter();
-  //const img = 'https://www.shutterstock.com/image-photo/food-background-spices-herbs-utensil-260nw-2254302831.jpg';
 
   useEffect(() => {
     async function fetchProviders() {
@@ -41,13 +40,11 @@ export default function SignInPage() {
   };
 
   return (
-    <div
-      className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat text-black"
-
-    >
+    <div className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat text-black">
       <div className="bg-white bg-opacity-80 p-8 rounded-lg shadow-md w-full max-w-lg">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Welcome to Recipes!</h1>
+        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Welcome to RecipeWorld!</h1>
 
+        {/* Sign In Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-700">Username</label>
@@ -93,19 +90,29 @@ export default function SignInPage() {
               Sign In
             </button>
           </div>
-          
         </form>
 
-        <div className="flex items-center justify-center mt-6">
-            {providers &&
-              Object.values(providers).map((provider) =>
-                provider.id !== 'credentials' ? (
-                  <div key={provider.name} className="mt-2">
-                    <SignInButton providerId={provider.id} providerName={provider.name} />
-                  </div>
-                ) : null
-              )}
+        {/* Divider */}
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300"></div>
           </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="bg-white px-2 text-gray-500">or</span>
+          </div>
+        </div>
+
+        {/* Sign in with Providers */}
+        <div className="flex items-center justify-center mt-2">
+          {providers &&
+            Object.values(providers).map((provider) =>
+              provider.id !== 'credentials' ? (
+                <div key={provider.name} className="mt-2">
+                  <SignInButton providerId={provider.id} providerName={provider.name} />
+                </div>
+              ) : null
+            )}
+        </div>
       </div>
     </div>
   );
