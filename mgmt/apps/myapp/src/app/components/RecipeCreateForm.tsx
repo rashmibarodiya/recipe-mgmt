@@ -7,38 +7,37 @@ import AddImage from "../addImage/page";
 import CustomDropdown from "./CustomDropDown";
 
 const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
-    const [title, setTitle] = useState(initialValues.title);
-    const [des, setDes] = useState(initialValues.description);
-    const [img, setImg] = useState<string>(initialValues.image||"");
-    const [category, setCategory] = useState(initialValues.category);
-    const [otherCategory, setOtherCategory] = useState(
-      initialValues.otherCategory || ""
-    );
-    const [steps, setSteps] = useState<Step[]>(initialValues.steps);
-    const [ings, setIngs] = useState<Ing[]>(initialValues.ingredients);
-  
-    const handleSubmit = (event: React.FormEvent) => {
-      event.preventDefault();
-      if (!img) {
-        alert("Please upload an image before submitting the recipe.");
-        return;
-      }
-  
-      const recipeData = {
-        title,
-        description: des,
-        image: img,
-        category: category === "" ? otherCategory : category,
-        ingredients: ings.map((i) => i.ing),
-        steps: steps.map((s) => s.step),
-      };
-      onSubmit(recipeData);
+  const [title, setTitle] = useState(initialValues.title);
+  const [des, setDes] = useState(initialValues.description);
+  const [img, setImg] = useState<string>(initialValues.image || "");
+  const [category, setCategory] = useState(initialValues.category);
+  const [otherCategory, setOtherCategory] = useState(
+    initialValues.otherCategory || ""
+  );
+  const [steps, setSteps] = useState<Step[]>(initialValues.steps);
+  const [ings, setIngs] = useState<Ing[]>(initialValues.ingredients);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!img) {
+      alert("Please upload an image before submitting the recipe.");
+      return;
+    }
+
+    const recipeData = {
+      title,
+      description: des,
+      image: img,
+      category: category === "" ? otherCategory : category,
+      ingredients: ings.map((i) => i.ing),
+      steps: steps.map((s) => s.step),
     };
-  
-    const handleImageUpload = (url: string) => {
-      setImg(url); // Set the uploaded image URL
-    };
-  
+    onSubmit(recipeData);
+  };
+
+  const handleImageUpload = (url: string) => {
+    setImg(url); // Set the uploaded image URL
+  };
 
   const handleIngChange = (
     index: number,
@@ -77,10 +76,10 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
     const newSteps = steps.filter((_, stepIndex) => stepIndex !== index);
     setSteps(newSteps);
   };
-//   const handleImageUpload = (url: string) => {
-//     setImg(url);
-//     console.log("img****************************************************************",img)
-//   };
+  //   const handleImageUpload = (url: string) => {
+  //     setImg(url);
+  //     console.log("img****************************************************************",img)
+  //   };
 
   return (
     <div className="text-black mt-50 max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:max-w-2xl pt-15 p-6 space-y-4">
@@ -119,14 +118,20 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
             <label className="block text-sm font-medium text-gray-700">
               Add Image
             </label>
-            <AddImage onImageUpload={handleImageUpload} /> {/* Pass the callback */}
+            <AddImage onImageUpload={handleImageUpload} />{" "}
+            {/* Pass the callback */}
           </div>
 
           {/* image Displaying here */}
-          <div>
-            <h3 className="text-lg font-semibold">Image Preview:</h3>
-            {img && <img src={img} alt="Uploaded" className="mt-4 w-60" />} {/* Use img state */}
-          </div>
+          {img && (
+            <div>
+              <h3 className="text-lg font-semibold">Image Preview:</h3>
+              {img && (
+                <img src={img} alt="Uploaded" className="mt-4 w-60" />
+              )}{" "}
+              {/* Use img state */}
+            </div>
+          )}
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">

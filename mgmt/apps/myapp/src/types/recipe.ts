@@ -19,5 +19,6 @@ export interface RecipeDisplayProps {
      mine?: boolean;
     id:string;
     color?: string;
+    className?:string
 }
 
