@@ -93,7 +93,7 @@ export default function ExplorePage() {
       {searchRecipes.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {searchRecipes.map((recipe) => (
-            <HalfRecipe key={recipe._id} recipe={recipe} id={recipe._id || ""} mine={true} />
+            <HalfRecipe key={recipe._id} recipe={recipe} className="bg-amber-100" id={recipe._id || ""} mine={true} />
           ))}
         </div>
       )}

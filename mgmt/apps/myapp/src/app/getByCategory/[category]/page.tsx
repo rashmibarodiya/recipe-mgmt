@@ -32,8 +32,8 @@ export default function GetUserRecipe() {
     }, []);
 
     return (
-        <div className="font-bold text-black pt-4 px-4">
-            <h1 className="text-3xl font-bold text-center mb-6">{category} Recipes</h1>
+        <div className="font-bold text-black pt-12 px-4">
+            <h1 className="text-4xl font-bold text-center mb-6">{category} Recipes</h1>
             <div className="ml-10 mr-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {recipes.map((recipe, index) => (
                     <div
@@ -41,7 +41,11 @@ export default function GetUserRecipe() {
                         className="p-4 cursor-pointer"
 
                     >
-                        <HalfRecipe recipe={recipe} color="yellow-700" className="h-full" mine  = {false} id={recipe._id ||""} />
+                        {/* red-100
+                        violet-100
+                        orange-200
+                         */}
+                        <HalfRecipe recipe={recipe} className="h-full bg-yellow-100 " mine  = {false} id={recipe._id ||""} />
                     </div>
                 ))}
             </div>
