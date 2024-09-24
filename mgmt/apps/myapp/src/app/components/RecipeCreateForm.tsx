@@ -36,6 +36,7 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
   };
 
   const handleImageUpload = (url: string) => {
+    console.log("image setted")
     setImg(url); // Set the uploaded image URL
   };
 
@@ -82,7 +83,7 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
   //   };
 
   return (
-    <div className="text-black mt-50 max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:max-w-2xl pt-15 p-6 space-y-4">
+    <div className="text-black mt-20 max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:max-w-2xl pt-15 p-6 space-y-4">
       <form onSubmit={handleSubmit}>
         <div className="ml-4 mr-4">
           <h2 className="text-2xl font-bold mb-4">
@@ -177,9 +178,8 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
                 {ings.length > 1 && (
                   <Button
                     type="button"
-                    color="red"
                     onClick={() => removeIng(index)}
-                    className="ml-2"
+                    className="ml-2 bg-red-500 text-white"
                   >
                     Remove
                   </Button>
@@ -188,9 +188,9 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
             ))}
             <Button
               type="button"
-              color="green"
+            
               onClick={addIng}
-              className="mt-2"
+              className="mt-2 bg-green-500 text-white"
             >
               Add Ingredient
             </Button>
@@ -210,9 +210,9 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
                 {steps.length > 1 && (
                   <Button
                     type="button"
-                    color="red"
+                    
                     onClick={() => removeStep(index)}
-                    className="ml-2"
+                    className="ml-2 bg-red-500 text-white"
                   >
                     Remove
                   </Button>
@@ -221,15 +221,14 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
             ))}
             <Button
               type="button"
-              color="green"
               onClick={addStep}
-              className="mt-2"
+              className="mt-2 bg-green-500 text-white"
             >
               Add Step
             </Button>
           </div>
 
-          <Button type="submit" color="green" className="w-full mt-4">
+          <Button type="submit" className="w-full mt-4 bg-green-500 text-white">
             {initialValues.title ? "Update Recipe" : "Submit Recipe"}
           </Button>
         </div>

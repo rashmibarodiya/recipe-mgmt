@@ -9,7 +9,7 @@ export default function Appbar() {
   const router = useRouter();
 
   return (
-    <div className="h-16 px-10 flex items-center  shadow-md text-black justify-between">
+    <div className="h-16 px-10 flex items-center md-20   shadow-md text-black justify-between">
       {/* <div className="font-bold text-xl text-customGold"></div> */}
       {session ? (
         <div className="flex items-center justify-between w-full">

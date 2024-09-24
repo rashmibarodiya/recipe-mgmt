@@ -6,15 +6,17 @@ export async function GET(request: Request) {
   await connect();
 
   const { searchParams } = new URL(request.url);
-  const skip = parseInt(searchParams.get("skip") || "0"); 
+  const skip = parseInt(searchParams.get("skip") || "0");
   const limit = parseInt(searchParams.get("limit") || "6");
 
+  console.log("Received skip:", skip, "limit:", limit); 
 
   try {
     const recipes = await Recipe.find({})
-      .sort({ ratings: -1 })
+      .sort({ ratings: -1 }) 
       .skip(skip)
       .limit(limit);
+    
     return NextResponse.json(recipes);
   } catch (error) {
     console.error("Error fetching sorted recipes:", error);

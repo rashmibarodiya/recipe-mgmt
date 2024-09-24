@@ -14,7 +14,7 @@ const AddRecipe = () => {
             alert(JSON.stringify(response.data));
         } catch (error) {
             console.error('Error submitting recipe:', error);
-            alert(error);
+            alert("error while adding recipe " +error);
         }
     };
 

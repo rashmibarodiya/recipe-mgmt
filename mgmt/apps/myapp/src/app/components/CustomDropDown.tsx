@@ -7,7 +7,7 @@ interface CustomDropdownProps {
 
 const CustomDropdown: React.FC<CustomDropdownProps> = ({ selected, setSelected }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const categories = ['Dessert', 'Chinese', 'Italian', 'Vegetarian', 'Beverages', 'Other'];
+  const categories = ['Dessert', 'Chinese', 'Italian', 'Vegetarian','Vegan', 'Beverages', 'Other'];
 
   return (
     <div className="relative inline-block w-full text-left">
