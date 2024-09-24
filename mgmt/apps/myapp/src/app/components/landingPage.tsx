@@ -1,6 +1,6 @@
 
 "use client"
-import CategoryDisplay from "./Display";
+import CategoryDisplay from "./CategoryDisplay";
 import { signIn, useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 export default function LandingPage() {
@@ -32,7 +32,7 @@ export default function LandingPage() {
                 something delicious to try.
               </p>
               <button
-                onClick={() => (session ? router.push("/explore") : router.push("/signin"))}
+                onClick={() => (session ? router.push("/explore") : router.push("auth/signin"))}
                 className="bg-customGold text-gray-800 hover:bg-yellow-500 hover:text-gray-900 font-semibold py-2 px-4 rounded transition-colors duration-300"
               >
                 {session ? "Explore" : "Get Started"}

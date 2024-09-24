@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import HalfRecipe from "../components/halfRecipe";
 import Recipe from "../../types/recipe"; // Adjust path as needed
-import CategoryDisplay from "../components/Display";
+import CategoryDisplay from "../components/CategoryDisplay";
 
 export default function ExplorePage() {
   const [query, setQuery] = useState<string>("");
