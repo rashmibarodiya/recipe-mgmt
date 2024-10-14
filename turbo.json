@@ -6,7 +6,8 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"],
-      "passThroughEnv": ["MONG"]
+      "passThroughEnv": ["MONG","SECRET","GOOGLE_CLIENT_ID","GOOGLE_CLIENT_SECRET",
+      "NEXT_PUBLIC_CLAUD_NAME","NEXT_PUBLIC_CLAUDINARY_PRESET"]
     },
     "lint": {
       "dependsOn": ["^lint"]
