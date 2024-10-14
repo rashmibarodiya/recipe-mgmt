@@ -3,7 +3,7 @@ import Recipe, { RecipeDisplayProps } from "../../types/recipe"; // Adjust the i
 import { Button } from "./Button";
 import { useRouter } from "next/navigation";
 import GetRating from "./fullRecipe/GetRating";
-import Image from "next/image";
+//import Image from "next/image";
 
 const HalfRecipe: React.FC<RecipeDisplayProps> = ({ recipe, mine, color, className }) => {
   const router = useRouter();
@@ -31,9 +31,12 @@ const HalfRecipe: React.FC<RecipeDisplayProps> = ({ recipe, mine, color, classNa
     >
       <div onClick={() => handleClick(recipe._id || "0")}>
         <div>
-          <Image
+          <img
             src={recipe.image}
             alt={recipe.title}
+      //       width={500} // specify width
+      // height={300} // specify height
+      // layout="responsive"
             className="w-full h-48 mb-4 object-cover rounded-t-lg"
           />
         </div>

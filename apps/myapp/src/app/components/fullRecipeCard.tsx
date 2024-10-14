@@ -4,7 +4,7 @@ import CommentService from "./fullRecipe/DisplayComment";
 import AddRating from "./fullRecipe/AddRating";
 import GetRating from "./fullRecipe/GetRating";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
+// import Image from "next/image";
 
 
 const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
@@ -27,9 +27,12 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
         {/* Recipe Image and Info */}
         <div className="flex flex-col md:flex-row items-center bg-gradient-to-r from-red-500 via-red-400 to-red-500 p-6">
           <div className="flex-shrink-0">
-            <Image
+            <img
               src={recipe.image}
               alt={recipe.title}
+      //         width={500} 
+      //         height={300} 
+      // layout="responsive"
               className="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-white object-cover shadow-md"
             />
           </div>
