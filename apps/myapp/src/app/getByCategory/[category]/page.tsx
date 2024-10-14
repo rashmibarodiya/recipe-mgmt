@@ -29,7 +29,7 @@ export default function GetUserRecipe() {
         };
 
         fetchRecipes();
-    }, []);
+    }, [category]);
 
     return (
         <div className="font-bold text-black pt-12 px-4">

@@ -1,6 +1,6 @@
 
 'use client'
-
+import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 
@@ -24,7 +24,7 @@ export  function CategoryDisplay({ url, category }: CategoryProps) {
       onClick={handleClick}
     >
       <div>
-        <img
+        <Image
           src={url}
           alt={category}
           className="w-64 h-64 opacity-100 object-cover rounded-t-lg"

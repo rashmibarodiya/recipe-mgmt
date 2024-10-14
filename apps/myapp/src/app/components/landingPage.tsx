@@ -3,6 +3,9 @@ import GetCategories from "./categoryMg/categories";
 import { signIn, useSession, signOut } from "next-auth/react";
 import { Bevan } from "next/font/google";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+
 export default function LandingPage() {
   const { data: session } = useSession();
   const router = useRouter();
@@ -22,7 +25,7 @@ export default function LandingPage() {
               </h1>
               <p className="text-xl mb-6">
                 Discover and share amazing recipes from around the world.
-                Whether you're a beginner or a master chef, you'll find
+                Whether you{"'"}re a beginner or a master chef, you{"'"}ll find
                 something delicious to try.
               </p>
               <button
@@ -35,13 +38,13 @@ export default function LandingPage() {
               </button>
             </div>
             <div className="relative flex flex-col items-center mt-10 ml-20 justify-center w-2/5 p-10">
-              <img
+              <Image
                 src={img3}
                 alt="Delicious Dish 1"
                 className="absolute w-60 h-60 object-cover rounded-full shadow-md"
                 style={{ top: "0", left: "0" }}
               />
-              <img
+              <Image
                 src={img}
                 alt="Delicious Dish 2"
                 className="absolute w-60 h-60 object-cover rounded-full shadow-md"

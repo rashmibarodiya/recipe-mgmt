@@ -26,7 +26,7 @@ const AddRating: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
       }
     };
     fetchRating();
-  }, [id, mine, session, recipe.authorName]);
+  }, [id, mine, session, recipe.authorName,recipe._id]);
 
   const handleRatingSubmit = async () => {
     try {

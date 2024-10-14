@@ -24,7 +24,7 @@
             }
         };
         fetchRating();
-      }, [rating]);
+      }, [rating,recipe._id]);
 
     const getStarRating = (rating: number) => {
       const fullStar = '★';

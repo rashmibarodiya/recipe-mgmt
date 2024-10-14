@@ -10,14 +10,14 @@ import { signIn, useSession, signOut } from "next-auth/react";
 export default function ExplorePage() {
   const router = useRouter();
   const { data: session } = useSession();
-  const [query, setQuery] = useState<string>(""); 
+  const [query, setQuery] = useState<string>("");
   const [searchRecipes, setSearchRecipes] = useState<Recipe[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [sortedRecipes, setSortedRecipes] = useState<Recipe[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [skip, setSkip] = useState<number>(0);
-  const limit = 6; 
+  const limit = 6;
   const [isFetching, setIsFetching] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
@@ -25,17 +25,12 @@ export default function ExplorePage() {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    if (isClient && !isFetching && sortedRecipes.length === 0 && !loading) {
-      fetchSortedRecipes();
-    }
-  }, [isClient, sortedRecipes.length, loading]);
 
   const fetchSortedRecipes = async () => {
     if (isFetching) return;
     setIsFetching(true);
     setLoading(true);
-    
+
     try {
       const response = await axios.get("/api/sortedRecipes", {
         params: { skip, limit },
@@ -56,7 +51,7 @@ export default function ExplorePage() {
       setLoading(false);
     }
   };
-
+ 
   const handleSearch = async () => {
     if (!query.trim()) return;
 
@@ -74,11 +69,18 @@ export default function ExplorePage() {
     }
   };
 
+  useEffect(() => {
+    if (isClient && !isFetching && sortedRecipes.length === 0 && !loading) {
+      fetchSortedRecipes();
+    }
+  }, [isClient, sortedRecipes.length, loading, isFetching, fetchSortedRecipes]);
+
+
   return (
     <div className="p-6 md:p-10 lg:p-14 min-h-screen">
       <div className="flex flex-col items-center bg-orange-100 p-10 shadow-lg text-slate-900 rounded-lg mb-10 mt-18 w-full h-96 max-w-screen-lg mx-auto">
         <h1 className="text-5xl md:text-6xl font-bold mt-10 mb-6 text-customGold text-center">
-          Explore Delicious Recipes :)
+          Explore Delicious Recipes :{")"}
         </h1>
         <p className="text-lg text-gray-700 text-center">
           Uncover new culinary adventures and indulge in unique flavors. Start by exploring categories or find inspiration with the search below.
@@ -150,13 +152,13 @@ export default function ExplorePage() {
           Ready to share your recipes?
         </p>
         <button
-        onClick={() =>
-          session ? router.push("/admin/addRecipe") : router.push("auth/signin")
-        }
-       className="bg-green-600 hover:bg-green-500 text-white px-6 py-3 text-lg rounded-lg">
-         
-      
-        {session ? "Add your Recipe" : "Get Started"}
+          onClick={() =>
+            session ? router.push("/admin/addRecipe") : router.push("auth/signin")
+          }
+          className="bg-green-600 hover:bg-green-500 text-white px-6 py-3 text-lg rounded-lg">
+
+
+          {session ? "Add your Recipe" : "Get Started"}
         </button>
       </div>
     </div>

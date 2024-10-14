@@ -44,7 +44,7 @@ const RecipeDetailPage = () => {
     console.log(check)
 
     fetchRecipe();
-  }, [id,check, session]);
+  }, [id,check, session,mine]);
 
   if (!recipe) return <div className="flex text-2xl mt-8 font-bold text-black justify-center">Loading...</div>;
 

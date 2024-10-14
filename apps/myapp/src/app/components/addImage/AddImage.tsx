@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import Image from "next/image";
 
 interface AddImageProps {
   onImageUpload: (url: string) => void;
@@ -66,7 +67,7 @@ const AddImage: React.FC<AddImageProps> = ({ onImageUpload }) => {
         className="mb-4"
       />
       {preview && (
-        <img src={preview} alt="Image Preview" className="mb-4 w-32 h-32 object-cover" />
+        <Image src={preview} alt="Image Preview" className="mb-4 w-32 h-32 object-cover" />
       )}
       {image && (
         <button

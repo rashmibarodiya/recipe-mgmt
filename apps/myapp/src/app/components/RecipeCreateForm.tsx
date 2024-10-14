@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import { Button } from "./Button";
 import { RecipeFormProps, Step, Ing } from "@/types/recipeForm";
-import AddImage from "../addImage/page";
+import AddImage from "./addImage/AddImage";
 import CustomDropdown from "./CustomDropDown";
+
+import Image from "next/image";
 
 const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
   const [title, setTitle] = useState(initialValues.title);
@@ -128,7 +130,7 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
             <div>
               <h3 className="text-lg font-semibold">Image Preview:</h3>
               {img && (
-                <img src={img} alt="Uploaded" className="mt-4 w-60" />
+                <Image src={img} alt="Uploaded" className="mt-4 w-60" />
               )}{" "}
               {/* Use img state */}
             </div>
