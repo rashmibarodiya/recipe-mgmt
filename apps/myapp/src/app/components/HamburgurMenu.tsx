@@ -63,7 +63,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ onToggle }) => {
               router.push("/explore")
             }}
           >Explore</li>
-          {!session ? (
+          {!session?.data ? (
 
            
             <li className="hover:text-orange-900 text-gray-700 cursor-pointer"

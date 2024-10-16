@@ -1,7 +1,7 @@
 "use client";
 import GetCategories from "./categoryMg/categories";
-import { signIn, useSession, signOut } from "next-auth/react";
-import { Bevan } from "next/font/google";
+import {  useSession } from "next-auth/react";
+
 import { useRouter } from "next/navigation";
 
 
@@ -19,7 +19,7 @@ export default function LandingPage() {
           <div className="flex justify-center w-full md:w-2/3 h-full p-10 bg-red-100 shadow-lg text-slate-900 rounded-lg">
             <div className="flex-1">
               <h1 className="md:text-6xl text-3xl font-bold mt-10 mb-6 text-customGold">
-                Welcome to Recipe World
+                Welcome to RecipeWorld
               </h1>
               <p className="text-md md:text-xl mb-6">
                 Discover and share amazing recipes from around the world.
