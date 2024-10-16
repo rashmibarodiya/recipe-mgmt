@@ -26,33 +26,50 @@ export default function LandingPage() {
                 Whether you{"'"}re a beginner or a master chef, you{"'"}ll find
                 something delicious to try.
               </p>
+              <div className="flex justify-left space-x-4 ">
+                
+              {!session && (
+                <div>
+                  <button
+                onClick={() =>
+                   router.push("auth/signin") 
+                }
+                className="bg-yellow-500 text-gray-800 hover:bg-yellow-400 hover:text-gray-900
+                 font-semibold py-2 px-4 rounded transition-colors duration-300"
+              >
+              Get Started
+              </button>
+                </div>
+              )}
+              
               <button
                 onClick={() =>
-                  session ? router.push("/explore") : router.push("auth/signin")
+                   router.push("/explore") 
                 }
                 className="bg-yellow-500 text-gray-800 hover:bg-yellow-400 hover:text-gray-900 font-semibold py-2 px-4 rounded transition-colors duration-300"
               >
-                {session ? "Explore" : "Get Started"}
+                 Explore
               </button>
+              </div>
             </div>
             <div className="relative flex flex-col items-center mt-20 md:mt-10 md:ml-20 justify-center w-2/5 p-10">
-  <Image
-    src="/download2.jpg"
-    alt="Delicious Dish 1"
-    width={300}
-    height={300}
-    className="absolute md:w-60 md:h-60 object-cover rounded-full shadow-md top-0 left-0"
-    
-  />
-  <Image
-    src="/st3.jpg"
-    alt="Delicious Dish 2"
-    width={300}
-    height={300}
-    className="absolute w-30 h-30 md:w-60 md:h-60 object-cover rounded-full shadow-md
-      top-8 left-5 md:top-20 md:left-20" 
-  />
-</div>
+              <Image
+                src="/download2.jpg"
+                alt="Delicious Dish 1"
+                width={300}
+                height={300}
+                className="absolute md:w-60 md:h-60 object-cover rounded-full shadow-md top-0 left-0 z-10"
+
+              />
+              <Image
+                src="/st3.jpg"
+                alt="Delicious Dish 2"
+                width={300}
+                height={300}
+                className="absolute w-30 h-30 md:w-60 md:h-60 object-cover rounded-full shadow-md
+                  top-8 left-5 md:top-20 md:left-20 z-10"
+              />
+            </div>
 
           </div>
         </div>

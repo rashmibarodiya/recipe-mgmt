@@ -30,7 +30,7 @@ const authOptions: NextAuthOptions = {
 
         const { username, password, email } = credentials;
         try {
-          const user = await User.findOne({ username });
+          const user = await User.findOne({ email });
 
           if (user && password === user.password) {
             console.log("Authentication successful");
@@ -69,7 +69,7 @@ const authOptions: NextAuthOptions = {
           const existingUser = await User.findOne({ email: user.email });
           console.log("existing user",existingUser)
           if (!existingUser) {
-            const newUser = new User({ email: user.email, username: user.name });
+            const newUser = new User({ email: user.email, username: user.email?.split("@")[0] });
             await newUser.save();
             console.log("New user created:", newUser);
           }

@@ -64,7 +64,7 @@ export default function Appbar() {
           </div>
         </div>
       ) : (
-        <div className="flex items-center justify-between w-full">
+        <div className="flex items-center ml-4 justify-between w-full">
           <div className="font-bold text-cyan-900 text-2xl">
             RecipeWorld
 

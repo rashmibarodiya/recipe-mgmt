@@ -46,6 +46,7 @@ async function searchRecipesByQuery(query: string) {
     $and: searchTerms.map(term => ({
       $or: [
         { title: { $regex: term, $options: 'i' } },
+        { category: { $regex: term, $options: 'i' } },
         { description: { $regex: term, $options: 'i' } },
         { ingredients: { $elemMatch: { $regex: term, $options: 'i' } } }
       ],

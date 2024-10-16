@@ -1,13 +1,15 @@
 import { useState } from 'react';
 
-
+import { useRouter } from "next/navigation"
+import { signOut, useSession } from 'next-auth/react';
 interface HamburgerMenuProps {
-  onToggle: (isOpen: boolean) => void; 
+  onToggle: (isOpen: boolean) => void;
 }
 
-const HamburgerMenu: React.FC<HamburgerMenuProps> = ({onToggle}) => {
+const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const session = useSession()
+  const router = useRouter();
   const toggleMenu = () => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
@@ -28,32 +30,71 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({onToggle}) => {
 
       {/* Overlay for closing the drawer by clicking outside */}
       {isOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50"
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-50"
           onClick={toggleMenu}
         />
       )}
 
       {/* Sidebar (Top Right Drawer) */}
       <div
-        className={`fixed top-0 right-0 w-64 h-full bg-red-300 shadow-lg text-white transition-transform transform ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`fixed top-0 right-0 w-64 h-full bg-stone-400  shadow-lg text-black transition-transform transform z-50 ${isOpen ? 'translate-x-0' : 'translate-x-full  '
+          }`}
       >
         {/* Close Button */}
-        <button 
-          className="text-white absolute top-4 right-4 focus:outline-none"
+        <button
+          className="text-black absolute top-4 right-4 focus:outline-none"
           onClick={toggleMenu}
         >
           &#10005;
         </button>
+        <div className='flex text-xl text-bold justify-center mt-8 text-gray-900'>
+        {session?.data ? `${session?.data?.user?.name}` : "RecipeWorld"}
+           </div>
+        <ul className="p-4 space-y-4 mt-8">
+          <li className="hover:text-orange-900 text-gray-700 cursor-pointer"
+            onClick={() => {
+              router.push("/")
+            }}
+          >Home</li>
 
-        <ul className="p-4 space-y-4 mt-12">
-          <li className="hover:text-indigo-900 cursor-pointer">Home</li>
-          <li className="hover:text-yellow-400 cursor-pointer">About</li>
-          <li className="hover:text-yellow-400 cursor-pointer">Signin</li>
-          <li className="hover:text-yellow-400 cursor-pointer">Explore</li>
-          <li className="hover:text-yellow-400 cursor-pointer">Contact</li>
+          <li className="hover:text-orange-900 text-gray-700 cursor-pointer"
+            onClick={() => {
+              router.push("/explore")
+            }}
+          >Explore</li>
+          {!session ? (
+
+           
+            <li className="hover:text-orange-900 text-gray-700 cursor-pointer"
+              onClick={() => {
+                router.push("/signin")
+              }}
+            >Signin</li>
+            
+          ) : (
+            <>
+              <li className="hover:text-orange-900 text-gray-700 cursor-pointer"
+                onClick={() => {
+                  router.push("/admin/addRecipe")
+                }}
+              >Add Recipes</li>
+              <li className="hover:text-orange-900 text-gray-700 cursor-pointer"
+                onClick={() => {
+                  router.push("/admin/getUserRecipe")
+                }}
+              >My Recipes</li>
+
+              <li className="hover:text-orange-900 text-gray-700 cursor-pointer"
+                onClick={() => {
+                  signOut({ callbackUrl: "/" })
+                }}
+              >Logout</li>
+
+            </>
+          )}
+
+
         </ul>
       </div>
     </div>

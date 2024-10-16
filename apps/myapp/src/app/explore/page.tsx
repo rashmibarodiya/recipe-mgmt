@@ -7,6 +7,8 @@ import Recipe from "../../types/recipe";
 import GetCategories from "../components/categoryMg/categories";
 import { useRouter } from "next/navigation";
 import { signIn, useSession, signOut } from "next-auth/react";
+import Image from "next/image";
+
 export default function ExplorePage() {
   const router = useRouter();
   const { data: session } = useSession();
@@ -78,16 +80,16 @@ export default function ExplorePage() {
 
   return (
     <div className="p-6 md:p-10 lg:p-14 min-h-screen">
-      <div className="flex flex-col items-center bg-orange-100 p-10 shadow-lg text-slate-900 rounded-lg mb-10 mt-18 w-full h-96 max-w-screen-lg mx-auto">
-        <h1 className="text-5xl md:text-6xl font-bold mt-10 mb-6 text-customGold text-center">
+      <div className="flex flex-col items-center bg-orange-100 p-6 shadow-lg text-slate-900 rounded-lg mb-10 mt-18 w-full h-full md:h-96 max-w-screen-lg mx-auto">
+        <h1 className="text-3xl md:text-6xl font-bold  md:mt-10 mb-6 text-customGold text-center">
           Explore Delicious Recipes :{")"}
         </h1>
-        <p className="text-lg text-gray-700 text-center">
+        <p className="md:text-lg text-gray-700 text-center">
           Uncover new culinary adventures and indulge in unique flavors. Start by exploring categories or find inspiration with the search below.
         </p>
 
         <div className="w-full mt-8 max-w-md mx-auto">
-          <div className="flex">
+          <div className="flex ">
             <input
               type="text"
               value={query}
@@ -97,9 +99,9 @@ export default function ExplorePage() {
             />
             <button
               onClick={handleSearch}
-              className="bg-blue-600 text-white px-4 rounded-r hover:bg-blue-500 transition duration-200"
+              className="bg-blue-600 px-4 rounded-r hover:bg-blue-500 transition duration-200"
             >
-              Search
+             <Image src="/search.svg" alt="search " width = {25} height = {25}/>
             </button>
           </div>
           {loading && <p className="text-center text-gray-500 mt-4">Loading...</p>}
