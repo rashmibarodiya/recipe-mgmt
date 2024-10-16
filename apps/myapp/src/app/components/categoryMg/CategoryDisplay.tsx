@@ -3,6 +3,7 @@
 
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface CategoryProps {
   url: string;
@@ -24,8 +25,10 @@ export  function CategoryDisplay({ url, category }: CategoryProps) {
       onClick={handleClick}
     >
       <div>
-        <img
+        <Image
           src={url}
+          width={300}
+          height={200}
           alt={category}
           className="w-64 h-64 opacity-100 object-cover rounded-t-lg"
         />

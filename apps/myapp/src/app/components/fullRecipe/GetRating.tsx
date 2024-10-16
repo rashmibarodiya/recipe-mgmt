@@ -43,7 +43,7 @@
     return (
       <div>
         {rating !== undefined && (
-          <div className="font-semibold text-gray-700 mt-2 flex items-center">
+          <div className="md:w-full font-semibold text-gray-700 mt-2 flex items-center">
             <span className="mr-2">Ratings:</span>
             <span className="text-yellow-500">{getStarRating(rating)}</span>
             <span className="ml-2 text-gray-600">({rating.toFixed(1)})</span>

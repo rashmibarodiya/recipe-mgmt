@@ -21,9 +21,9 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
   }, [session, recipe.authorName]);
 
   return (
-    <div className="py-10 text-black">
-      {/* Main Card Container */}
-      <div className="max-w-3xl mx-auto rounded-lg border-4 border-gray-300 shadow-xl overflow-hidden">
+    <div className="py-10 text-black ">
+      {/* Main Card Container + rating +comment */}
+      <div className=" md:max-w-3xl overflow-hiddenmx-auto rounded-lg border-4 border-gray-300 shadow-xl ">
         {/* Recipe Image and Info */}
         <div className="flex flex-col md:flex-row items-center bg-gradient-to-r from-red-500 via-red-400 to-red-500 p-6">
           <div className="flex-shrink-0">
@@ -36,7 +36,7 @@ const RecipeDisplay: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
               className="w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-white object-cover shadow-md"
             />
           </div>
-          <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left w-full">
+          <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left md:w-full">
             <h3 className="text-3xl md:text-4xl font-bold text-white">
               {recipe.title}
             </h3>

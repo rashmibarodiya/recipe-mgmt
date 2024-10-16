@@ -49,11 +49,11 @@ const RecipeDetailPage = () => {
   if (!recipe) return <div className="flex text-2xl mt-8 font-bold text-black justify-center">Loading...</div>;
 
   return (
-    <div className="text-black p-4 sm:p-6 lg:p-8">
+    <div className="text-black p-4 sm:p-6 lg:p-8 ">
       {/* <div className="text-lg font-semibold mb-4">Recipe ID: {id as string}</div> */}
 
       {/* Render RecipeDisplay */}
-      <div className="flex justify-left ml-10">
+      <div className="flex justify-left md:ml-10">
         <div className="">
           <RecipeDisplay recipe={recipe} mine={mine} id={id as string} />
         </div>

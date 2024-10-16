@@ -117,23 +117,23 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ initialValues, onSubmit }) => {
             </label>
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 ">
             <label className="block text-sm font-medium text-gray-700">
               Add Image
             </label>
+            
             <AddImage onImageUpload={handleImageUpload} />{" "}
+
             {/* Pass the callback */}
           </div>
 
-          {/* image Displaying here */}
+          
           {img && (
             <div>
               <h3 className="text-lg font-semibold">Image Preview:</h3>
               {img && (
-                <Image 
-                width={500}
-                height={300}
-                layout="responsive"src={img} alt="Uploaded" className="mt-4 w-60" />
+                <img 
+               src={img} alt="Uploaded" className="mt-4 w-60" />
               )}{" "}
               {/* Use img state */}
             </div>

@@ -69,7 +69,7 @@ export default function Appbar() {
             RecipeWorld
 
           </div>
-         <div className="space-x-4 "> 
+         <div className="space-x-4 hidden md:flex "> 
 
           <button
             className=" bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300"

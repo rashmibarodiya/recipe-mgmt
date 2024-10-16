@@ -117,8 +117,8 @@ export default function ExplorePage() {
         </div>
       )}
 
-      <div className="mt-20">
-        <h2 className="text-3xl font-bold ml-14 text-gray-800">Recipe Categories</h2>
+      <div className="md:mt-20">
+        <h2 className=" text-xl md:text-3xl font-bold  md:ml-14 text-gray-800">Recipe Categories</h2>
         <GetCategories />
       </div>
 
