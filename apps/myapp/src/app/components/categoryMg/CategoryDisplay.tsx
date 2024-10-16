@@ -18,7 +18,7 @@ export  function CategoryDisplay({ url, category }: CategoryProps) {
 
   return (
     <div
-       className="w-80 mx-auto bg-violet-200 opacity-100 rounded-lg shadow-lg 
+       className="w-80 md:w-80 mx-auto bg-violet-200 opacity-100 rounded-lg shadow-lg 
        overflow-hidden md:max-w-3xl p-8 space-y-4 transform transition-transform 
        hover:scale-105 hover:shadow-2xl cursor-pointer"
       onClick={handleClick}
