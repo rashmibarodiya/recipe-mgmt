@@ -68,7 +68,7 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({ onToggle }) => {
            
             <li className="hover:text-orange-900 text-gray-700 cursor-pointer"
               onClick={() => {
-                router.push("/signin")
+                router.push("/auth/signin")
               }}
             >Signin</li>
             

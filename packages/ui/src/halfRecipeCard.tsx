@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const RecipeCard: React.FC<RecipeDisplayProps> = ({ recipe }) => {
   // Calculate the average rating
-console.log(recipe)
+// console.log(recipe)
   const avgRating = (ratings?: number[]): number => {
     if (!ratings || ratings.length === 0) return 0;
     const totalRating = ratings.reduce((acc, rating) => acc + rating, 0);

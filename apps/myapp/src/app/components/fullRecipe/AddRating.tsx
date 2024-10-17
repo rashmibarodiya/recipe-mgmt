@@ -40,8 +40,12 @@ const AddRating: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
             },
           }
         );
-        alert("Rating added: " + res.data.message);
-        setRating(0); // Reset the rating after submission
+        if (!res.data.message){
+          alert("you are not logged in")
+        }else{
+        alert( res.data.message);
+        setRating(0); 
+        }
       } else {
         alert("Please select a rating.");
       }

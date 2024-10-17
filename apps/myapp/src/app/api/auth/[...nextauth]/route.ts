@@ -88,8 +88,7 @@ const authOptions: NextAuthOptions = {
       return baseUrl;
     },  
     async jwt({ token, user }: { token: JWT; user?: NextAuthUser }) {
-      console.log("user jwt ",user)
-      console.log("token jwt ",token)
+      
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -98,8 +97,7 @@ const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }: { session: Session; token: JWT }) {
-      console.log("session session",session)
-      console.log("session token ",token)
+     
       if (token) {
 
         session.user = { name: token.name || "", email: token.email || "" };

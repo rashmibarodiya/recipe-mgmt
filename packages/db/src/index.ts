@@ -65,7 +65,7 @@ const recipeSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['Dessert', 'Chinese', 'Italian','Vegetarian', 'Beverages','Other'],
+        enum: ['Dessert', 'Chinese', 'Italian','Vegetarian', 'Beverages','Vegan','Other'],
         required: true
     },
     feedback: [{

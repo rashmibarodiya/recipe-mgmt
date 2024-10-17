@@ -5,7 +5,7 @@ export default interface Recipe {
     ingredients: string[];
     image: string;
     steps: string[];
-    category: 'Dessert' | 'Chinese' | 'Italian' | 'Vegetarian' | 'Beverages' | 'Other';
+    category: 'Dessert' | 'Chinese' | 'Italian' | 'Vegetarian' | 'Beverages' |'Vegan'| 'Other';
     otherCategory?: string;
     feedback?: string[];
     ratings?: number[];

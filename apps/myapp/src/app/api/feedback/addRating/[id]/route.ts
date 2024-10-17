@@ -8,9 +8,11 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
     await connect();
 
     try {
+
+        console.log("why the hell i am here")
         const { id } = params;
         const body = await req.json();
-        const { points } = body;
+        const { points } = body; 
 
       
         if (!points || points < 1 || points > 5) {
@@ -29,11 +31,13 @@ export async function POST(req: NextRequest, { params }: { params: { id: string 
             return NextResponse.json({ message: 'User not found' }, { status: 404 });
         }
 
-      
+        
         const recipe = await Recipe.findById(id);
         if (!recipe) {
             return NextResponse.json({ message: 'Recipe not found' }, { status: 404 });
         }
+
+        console.log("%%%%%%%%%%%%%%%%%%%%%%% ",recipe)
 
         // Check if the user has already rated this recipe && here is any
         const existingRating = recipe.ratings.find((rating : any) => rating.user.toString() === user._id.toString());

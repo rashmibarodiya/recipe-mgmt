@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
             authorName:user.username,
             author: user._id, 
         });
-        console.log(recipe);
+        // console.log(recipe);
 
         // Save the recipe to the database
         await recipe.save();

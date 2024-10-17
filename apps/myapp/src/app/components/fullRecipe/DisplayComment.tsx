@@ -46,14 +46,14 @@ const CommentService: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
           },
         }
       );
-      alert("holy " + res.data.message);
+      alert(res.data.message);
       setReview("");
       // Re-fetch feedbacks after submitting a new review
       const feedbackRes = await axios.get(`/api/feedback/getComment/${id}`);
       setFeedbacks(feedbackRes.data.feedbacks);
     } catch (e) {
       console.error("Request failed", e);
-      alert("this is the problem");
+      alert(e);
     }
   };
 

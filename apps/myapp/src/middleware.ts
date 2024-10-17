@@ -5,22 +5,22 @@ import { User } from '@repo/db';
 const secret = process.env.NEXTAUTH_SECRET!;
 
 export default async function middleware(req: NextRequest) {
-    //const { pathname } = req.nextUrl;
-   // console.log("pathname", pathname);
-   // console.log("Request Cookies:", req.cookies);
-
+    
     try {
         // Use next-auth's getToken to verify the token
         const token = await getToken({ req, secret });
-
+        const url = process.env.NEXTAUTH_URL!
         if (!token) {
-            console.log("No token provided");
-            return NextResponse.redirect(new URL('/api/auth/signin', req.url));
+            // const signInUrl = new URL('/auth/signin', req.url);
+            const signInUrl = new URL('/auth/signin', req.url);
+            signInUrl.searchParams.set('callbackUrl', req.url);
+    
+            return NextResponse.redirect(signInUrl)
         }
 
         console.log("Token Payload:", token);
-        console.log("hi ha")
-//console.log(token.sub as string)
+
+        //console.log(token.sub as string)
 
         // Set the userId in the headers
         const response = NextResponse.next();
@@ -38,5 +38,5 @@ export default async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/api/admin/:path*','/api/feedback/:path*' ], 
+    matcher: ['/api/admin/:path*', '/api/feedback/:path*'],
 }

@@ -18,7 +18,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     }
 
     const user = await User.findById(recipe.author)
-    console.log(recipe)
+    // console.log(recipe)
     return NextResponse.json({
       recipe,user
     });

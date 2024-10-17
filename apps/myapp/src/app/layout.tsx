@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} h-screen w-screen`}>
         <div
-          className="h-screen w-screen bg-cover bg-center overflow-auto"
+          className="h-screen w-screen bg-cover bg-center bg-gray-900 overflow-auto"
           style={{
             backgroundImage: `url('/bg5.jpg')`,
           }}
