@@ -11,11 +11,12 @@ export default async function middleware(req: NextRequest) {
         const token = await getToken({ req, secret });
         const url = process.env.NEXTAUTH_URL!
         if (!token) {
+            console.log("i am here but should not")
             // const signInUrl = new URL('/auth/signin', req.url);
             const signInUrl = new URL('/auth/signin', req.url);
             signInUrl.searchParams.set('callbackUrl', req.url);
     
-            return NextResponse.redirect(signInUrl)
+            return NextResponse.redirect(new URL('/auth/signin', req.nextUrl))
         }
 
         console.log("Token Payload:", token);

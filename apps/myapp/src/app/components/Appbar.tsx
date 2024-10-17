@@ -6,10 +6,13 @@ import { Button } from "./Button";
 import HamburgerMenu from "../components/HamburgurMenu"
 import { useState } from "react";
 
+
 export default function Appbar() {
   const { data: session } = useSession();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
 
   return (
     <div className="h-16 px-10 flex items-center md-20   shadow-md text-black justify-between">

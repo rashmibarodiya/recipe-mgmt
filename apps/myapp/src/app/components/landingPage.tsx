@@ -78,7 +78,7 @@ export default function LandingPage() {
       <div
         className="text-2xl md:text-4xl text-indigo-950 font-bold text-center text-white 
       bg-gradient-to-r from-red-400 via-red-200 to-red-400 shadow-xl 
-      rounded-lg p-6 md:p-8 w-3/4 max-w-4xl mx-auto my-10 transform transition-transform hover:scale-105"
+      rounded-lg p-6 md:p-8 w-3/4 max-w-4xl mx-auto my-6 transform transition-transform hover:scale-105"
       >
         Select by Category
       </div>
