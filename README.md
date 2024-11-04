@@ -32,13 +32,12 @@ This repository is a **Turborepo** that serves as a monorepo for managing multip
 1. **Clone the repository**:
    ```bash
    git clone <repository-url>
-   cd <repository-folder>
-```
+   cd <repository-folder>```
 
-Install dependencies:
+
+2.**Install dependencies**:
 
 ```bash
-Copy code
 npm install
 Running Applications:
 ```
@@ -47,14 +46,11 @@ Other Applications: Follow similar instructions within each app’s folder if ap
 Build and Run:
 
 ```bash
-Copy code
 npm run build     # Builds all applications and packages
 npm run dev       # Runs all applications in development mode
 ```
 **Additional Resources**
 RecipeWorld: See RecipeWorld README for detailed information on the recipe application.
 Turborepo Documentation: https://turbo.build/repo/docs
-css
-Copy code
 
 Replace `<repository-url>` and `<repository-folder>` with your actual repository details. This structure will
