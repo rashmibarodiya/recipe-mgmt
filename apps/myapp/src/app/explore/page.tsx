@@ -6,7 +6,7 @@ import HalfRecipe from "../components/halfRecipe";
 import Recipe from "../../types/recipe";
 import GetCategories from "../components/categoryMg/categories";
 import { useRouter } from "next/navigation";
-import { signIn, useSession, signOut } from "next-auth/react";
+import {  useSession } from "next-auth/react";
 import Image from "next/image";
 
 export default function ExplorePage() {
@@ -94,6 +94,12 @@ export default function ExplorePage() {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch();
+                }
+              }
+            }
               placeholder="Search by title, description, or ingredients..."
               className="border rounded-l p-2 w-full text-black focus:ring-2 focus:ring-customGold transition duration-200"
             />
@@ -103,8 +109,14 @@ export default function ExplorePage() {
             >
              <Image src="/search.svg" alt="search " width = {25} height = {25}/>
             </button>
+            
           </div>
-          {loading && <p className="text-center text-gray-500 mt-4">Loading...</p>}
+          {loading && 
+            <div
+              className="lg:ml-48 ml-24 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid 
+              border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+              role="status"></div>
+          }
           {error && <p className="text-center text-red-500 mt-4">{error}</p>}
         </div>
       </div>
@@ -112,7 +124,7 @@ export default function ExplorePage() {
       {searchRecipes.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {searchRecipes.map((recipe) => (
-            <HalfRecipe key={recipe._id} recipe={recipe} className="bg-amber-100" id={recipe._id || ""} mine={true} />
+            <HalfRecipe key={recipe._id} recipe={recipe} className="bg-amber-100" id={recipe._id || ""}  />
           ))}
         </div>
       )}

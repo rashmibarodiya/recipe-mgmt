@@ -6,10 +6,10 @@ import { FaStar } from "react-icons/fa";
 
 const AddRating: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
   const [mine, setMine] = useState(false);
-  const [rating, setRating] = useState<number>(0); 
+  const [rating, setRating] = useState<number>(0);
   const [hoverRating, setHoverRating] = useState<number | null>(null);
   const { data: session } = useSession();
-
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     if (session?.user?.name === recipe.authorName) {
       setMine(true);
@@ -26,10 +26,11 @@ const AddRating: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
       }
     };
     fetchRating();
-  }, [id, mine, session, recipe.authorName,recipe._id]);
+  }, [id, mine, session, recipe.authorName, recipe._id]);
 
   const handleRatingSubmit = async () => {
     try {
+      setLoading(true)
       if (rating !== null) {
         const res = await axios.post(
           `/api/feedback/addRating/${id}`,
@@ -40,16 +41,18 @@ const AddRating: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
             },
           }
         );
-        if (!res.data.message){
+        if (!res.data.message) {
           alert("you are not logged in")
-        }else{
-        alert( res.data.message);
-        setRating(0); 
+        } else {
+          alert(res.data.message);
+          setRating(0);
         }
       } else {
         alert("Please select a rating.");
       }
+      setLoading(false)
     } catch (e) {
+      setLoading(false)
       console.error("Failed to add rating", e);
       alert(e);
     }
@@ -64,9 +67,8 @@ const AddRating: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
             <FaStar
               key={value}
               size={32}
-              className={`mx-1 cursor-pointer ${
-                (hoverRating ?? rating ?? 0) >= value ? "text-yellow-500" : "text-gray-300"
-              }`}
+              className={`mx-1 cursor-pointer ${(hoverRating ?? rating ?? 0) >= value ? "text-yellow-500" : "text-gray-300"
+                }`}
               onClick={() => setRating(value)}
               onMouseEnter={() => setHoverRating(value)}
               onMouseLeave={() => setHoverRating(null)}
@@ -77,7 +79,15 @@ const AddRating: React.FC<RecipeDisplayProps> = ({ recipe, id }) => {
           className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
           onClick={handleRatingSubmit}
         >
-          Submit Rating
+          {loading?(
+            <div
+              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid 
+              border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+              role="status"></div>
+          ):
+          (
+           "Submit" 
+          )}
         </button>
       </div>
     </div>

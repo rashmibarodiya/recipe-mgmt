@@ -13,7 +13,7 @@ const RecipeDetailPage = () => {
   const { data: session } = useSession();
   const [mine, setMine] = useState(false);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const[check,setCheck] = useState(false)
+  const [check, setCheck] = useState(false)
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -44,9 +44,14 @@ const RecipeDetailPage = () => {
     console.log(check)
 
     fetchRecipe();
-  }, [id,check, session,mine]);
+  }, [id, check, session, mine]);
 
-  if (!recipe) return <div className="flex text-2xl mt-8 font-bold text-black justify-center">Loading...</div>;
+  if (!recipe) return <div className="flex text-2xl mt-8 font-bold text-black justify-center">
+    <div
+      className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid 
+                        border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+      role="status"></div>
+  </div>;
 
   return (
     <div className="text-black p-4 sm:p-6 lg:p-8 ">
@@ -64,7 +69,7 @@ const RecipeDetailPage = () => {
       </div>
 
       {/* Conditionally render the recipes array if mine is false */}
-      {!mine &&check && recipes && recipes.length > 0  && (
+      {!mine && check && recipes && recipes.length > 0 && (
         <div className="mt-8">
           <h2 className="text-2xl font-bold mb-4">More Recipes byyyy {recipe?.authorName}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

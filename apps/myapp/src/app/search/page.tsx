@@ -56,13 +56,17 @@ export default function SearchPage() {
         </button>
       </div>
 
-      {loading && <p>Loading...</p>}
+      {loading && <div
+        className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid 
+                        border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+        role="status"></div>
+      }
       {error && <p className="text-red-500">{error}</p>}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {recipes.map((recipe) => (
-  <HalfRecipe key={recipe._id} recipe={recipe} id={recipe._id || ""} mine={true} />
-))}
+        {recipes.map((recipe) => (
+          <HalfRecipe key={recipe._id} recipe={recipe} id={recipe._id || ""} mine={true} />
+        ))}
 
       </div>
     </div>

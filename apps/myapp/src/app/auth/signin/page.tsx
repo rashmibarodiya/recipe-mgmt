@@ -8,6 +8,8 @@ import { SignInButton } from '../../../component/SignInButton';
 export default function SignInPage() {
   const [credentials, setCredentials] = useState({ username: '', password: '', email: '' });
   const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null);
+  const[loading, setLoading]=useState(false)
+
   const router = useRouter();
 
   useEffect(() => {
@@ -23,8 +25,9 @@ export default function SignInPage() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    
     e.preventDefault();
-
+setLoading(true)
     const res = await signIn('credentials', {
       redirect: false,
       username: credentials.username,
@@ -33,15 +36,17 @@ export default function SignInPage() {
     });
 
     if (res?.ok) {
+      setLoading(false)
       router.push('/');
     } else {
+      setLoading(true)
       console.error('Sign in failed', res?.error);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat text-black">
-      <div className="bg-white bg-opacity-80 p-8 rounded-lg shadow-md w-full max-w-lg">
+    <div className="flex items-center justify-center mt-24 bg-cover  bg-no-repeat text-black">
+      <div className="bg-gray-100 bg-opacity-80 p-8 rounded-lg shadow-md w-full max-w-lg">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Welcome to RecipeWorld!</h1>
 
         {/* Sign In Form */}
@@ -87,7 +92,12 @@ export default function SignInPage() {
               type="submit"
               className="w-full py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
             >
-              Sign In
+             {loading?(
+              <div
+              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid 
+              border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+              role="status"></div>
+             ):("Signin")}
             </button>
           </div>
         </form>

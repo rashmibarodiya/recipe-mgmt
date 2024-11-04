@@ -11,11 +11,12 @@ export default function Appbar() {
   const { data: session } = useSession();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+ 
 
 
 
   return (
-    <div className="h-16 px-10 flex items-center md-20   shadow-md text-black justify-between">
+    <div className="h-16 px-10 flex items-center md-20  bg-gray-100 shadow-md text-black justify-between">
        <HamburgerMenu onToggle={setIsMenuOpen} />
       
 
@@ -44,9 +45,18 @@ export default function Appbar() {
             <button
               color="orange"
               className="bg-orange-500 text-white font-semibold py-2 px-4 rounded-md shadow-lg hover:bg-orange-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
-              onClick={() => router.push("/admin/addRecipe")}
+              onClick={() =>
+                { 
+                  
+                  router.push("/admin/addRecipe")
+              
+                }
+                }
             >
+            
               Add Recipe
+            
+          
             </button>
             <button
               color="orange"
@@ -83,7 +93,7 @@ export default function Appbar() {
           </button>
           <button
               color="orange"
-              className="bg-orange-500 text-white font-semibold py-2 px-4 rounded-md shadow-lg hover:bg-orange-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              className="bg-green-500 text-white font-semibold py-2 px-4 rounded-md shadow-lg hover:bg-green-400 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-orange-300"
               onClick={() => router.push("/explore")}
             >
               Explore

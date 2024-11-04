@@ -75,7 +75,10 @@ const AddImage: React.FC<AddImageProps> = ({ onImageUpload }) => {
           disabled={loading}
           className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
         >
-          {loading ? "Uploading..." : "Upload Image"}
+          {loading ? (<div
+                        className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid 
+                        border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                        role="status"></div>) : "Upload Image"}
         </button>
       )}
     </div>

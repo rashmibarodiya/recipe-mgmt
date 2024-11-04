@@ -14,14 +14,14 @@ export default function LandingPage() {
     <div>
 
       <div className="flex items-center min-h-screen bg-peach bg-cover bg-center">
-        <div className="flex w-full h-full md:w-3/4 lg:w-full p-6 md:p-20 text-slate-100">
+        <div className="flex w-full h-full  lg:w-full p-6 md:p-20 text-slate-100">
           {/* Outer pink container */}
           <div className="flex justify-center w-full md:w-2/3 h-full p-10 bg-red-100 shadow-lg text-slate-900 rounded-lg">
             <div className="flex-1">
-              <h1 className="md:text-6xl text-3xl font-bold mt-10 mb-6 text-customGold">
+              <h1 className="md:text-6xl text-3xl font-bold lg:mt-10 mt-6 mb-6 ">
                 Welcome to RecipeWorld
               </h1>
-              <p className="text-md md:text-xl mb-6">
+              <p className="text-md md:text-lg  mb-6">
                 Discover and share amazing recipes from around the world.
                 Whether you{"'"}re a beginner or a master chef, you{"'"}ll find
                 something delicious to try.
