@@ -13,10 +13,10 @@ export default function LandingPage() {
   return (
     <div>
 
-      <div className="flex items-center min-h-screen  bg-cover bg-center">
-        <div className="flex w-full h-full bg-yellow-500 lg:w-full  p-4 lg:p-20 text-slate-100">
+      <div className="flex items-center bg-cover bg-center">
+        <div className="flex w-full h-full lg:w-full  p-4 lg:p-20 text-slate-100">
           {/* Outer pink container */}
-          <div className="flex justify-center w-full lg:w-2/3 h-full p-10 bg-red-100 shadow-lg text-slate-900 rounded-lg">
+          <div className="flex justify-center w-full md:w-2/3 lg:w-2/3 h-full p-10 bg-red-100 shadow-lg text-slate-900 rounded-lg">
             <div className="flex-1">
               <h1 className="md:text-6xl text-3xl font-bold lg:mt-10 mt-6 mb-6 ">
                 Welcome to RecipeWorld
@@ -78,7 +78,7 @@ export default function LandingPage() {
       <div
         className="text-2xl md:text-4xl text-indigo-950 font-bold text-center text-white 
       bg-gradient-to-r from-red-400 via-red-200 to-red-400 shadow-xl 
-      rounded-lg p-6 md:p-8 w-3/4 max-w-4xl mx-auto my-6 transform transition-transform hover:scale-105"
+      rounded-lg p-6 md:p-8 w-3/4 max-w-4xl mx-auto lg:my-6 transform transition-transform hover:scale-105"
       >
         Select by Category
       </div>
