@@ -16,9 +16,9 @@ export default function LandingPage() {
       <div className="flex items-center m-4 md:my-8 bg-cover bg-center">
         <div className="flex w-full h-full lg:w-full  p-4 lg:p-20 text-slate-100">
           {/* Outer pink container */}
-          <div className="flex justify-center md:ml-20 w-full md:w-2/3 lg:w-2/3 h-full p-10 bg-red-100 shadow-lg text-slate-900 rounded-lg">
-            <div className="flex-1">
-              <h1 className="md:text-6xl text-3xl font-bold lg:mt-10 mt-6 mb-6 ">
+          <div className="flex justify-center md:ml-20 w-full md:w-2/3 lg:w-2/3 h-full p-8 bg-red-100 shadow-lg text-slate-900 rounded-lg">
+            <div className="flex-1 lg:ml-4">
+              <h1 className="md:text-5xl text-3xl lg:text-6xl font-bold lg:mt-10 mt-6 mb-6  ">
                 Welcome to RecipeWorld
               </h1>
               <p className="text-md md:text-lg  mb-6">
@@ -52,25 +52,25 @@ export default function LandingPage() {
               </button>
               </div>
             </div>
-            <div className="relative flex flex-col items-center mt-20 md:mt-10 md:ml-20 justify-center w-2/5 p-10">
-              <Image
-                src="/download2.jpg"
-                alt="Delicious Dish 1"
-                width={300}
-                height={300}
-                className="absolute lg:w-40 lg:40 md:w-30 md:h-30 object-cover rounded-full
-                 shadow-md sm:top-0 sm:left-0 lg:top-0 lg:left-0 md:right-15 md:top-0 z-10"
+            <div className="relative flex flex-col items-center justify-center md:mt-10 md:ml-20 w-2/5 p-10">
+  <Image
+    src="/download2.jpg"
+    alt="Delicious Dish 1"
+    width={300}
+    height={300}
+    className="absolute w-30 h-30 md:w-22 md:h-22 lg:w-60 lg:h-60 object-cover rounded-full shadow-md
+     top-22 right-3 md:top-6 md:left-18 lg:top-0 lg:left-2 z-10"
+  />
+  <Image
+    src="/st3.jpg"
+    alt="Delicious Dish 2"
+    width={300}
+    height={300}
+    className="absolute w-30 h-30 md:w-40 md:h-30 lg:w-60 lg:h-60 object-cover rounded-full
+     shadow-md top-28 left-2 lg:top-20 lg:left-20 md:top-20 md:left-6 z-20"
+  />
+</div>
 
-              />
-              <Image
-                src="/st3.jpg"
-                alt="Delicious Dish 2"
-                width={300}
-                height={300}
-                className="absolute w-30 h-30  lg:w-40 lg:40 object-cover rounded-full shadow-md
-                  top-8 left-5 sm:top-20 sm:left-20 lg:top-20 lg:left-20 md:top-8 md:left-8 z-10"
-              />
-            </div>
 
           </div>
         </div>
