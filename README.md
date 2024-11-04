@@ -1,83 +1,60 @@
-# recipe-mgmt
+# Turborepo Project
 
-# Turborepo starter
+This repository is a **Turborepo** that serves as a monorepo for managing multiple applications and packages with shared dependencies, ensuring efficient builds and streamlined development.
 
-This is an official starter Turborepo.
+## Contents
 
-## Using this example
+- **apps/**
+  - **myapp (RecipeWorld)** - A recipe management application where users can explore, add, edit, and rate recipes. See the [RecipeWorld README](apps/myapp/README.md) for more details.
+  - **web** - A placeholder for a generic web application.
+  - **doc** - Documentation or content-related application.
 
-Run the following command:
+- **packages/**
+  - Shared packages and libraries that may be used across multiple apps in this repo.
 
-```sh
-npx create-turbo@latest
+## Key Features
+
+- **Centralized Management:** All applications are managed in one place, with shared dependencies and configuration.
+- **Efficient Builds:** Utilizes Turborepo’s caching and parallelization to improve build times.
+- **Reusable Components:** Shared libraries and packages allow for code reuse across applications.
+- **Consistent Environment:** Ensures that all apps in the monorepo follow consistent versioning and dependencies.
+
+## Tech Stack
+
+- **Monorepo Management:** [Turborepo](https://turbo.build/repo)
+- **Primary Frameworks:** Next.js for web applications
+- **Styling:** Tailwind CSS (primarily in `RecipeWorld`)
+- **Image Hosting:** Cloudinary (used in `RecipeWorld`)
+- **Database:** MongoDB (used in `RecipeWorld`)
+
+## Setup and Development
+
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
 ```
 
-## What's inside?
+Install dependencies:
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
+```bash
+Copy code
+npm install
+Running Applications:
 ```
-cd my-turborepo
-pnpm build
+RecipeWorld (myapp): Navigate to apps/myapp and follow its specific setup instructions.
+Other Applications: Follow similar instructions within each app’s folder if applicable.
+Build and Run:
+
+```bash
+Copy code
+npm run build     # Builds all applications and packages
+npm run dev       # Runs all applications in development mode
 ```
+**Additional Resources**
+RecipeWorld: See RecipeWorld README for detailed information on the recipe application.
+Turborepo Documentation: https://turbo.build/repo/docs
+css
+Copy code
 
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+Replace `<repository-url>` and `<repository-folder>` with your actual repository details. This structure will
