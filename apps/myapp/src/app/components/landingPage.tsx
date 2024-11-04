@@ -13,10 +13,10 @@ export default function LandingPage() {
   return (
     <div>
 
-      <div className="flex items-center min-h-screen bg-peach bg-cover bg-center">
-        <div className="flex w-full h-full  lg:w-full p-6 md:p-20 text-slate-100">
+      <div className="flex items-center min-h-screen  bg-cover bg-center">
+        <div className="flex w-full h-full bg-yellow-500 lg:w-full  p-4 lg:p-20 text-slate-100">
           {/* Outer pink container */}
-          <div className="flex justify-center w-full md:w-2/3 h-full p-10 bg-red-100 shadow-lg text-slate-900 rounded-lg">
+          <div className="flex justify-center w-full lg:w-2/3 h-full p-10 bg-red-100 shadow-lg text-slate-900 rounded-lg">
             <div className="flex-1">
               <h1 className="md:text-6xl text-3xl font-bold lg:mt-10 mt-6 mb-6 ">
                 Welcome to RecipeWorld
@@ -58,7 +58,7 @@ export default function LandingPage() {
                 alt="Delicious Dish 1"
                 width={300}
                 height={300}
-                className="absolute md:w-60 md:h-60 object-cover rounded-full shadow-md top-0 left-0 z-10"
+                className="absolute md:w-40 md:h-40 object-cover rounded-full shadow-md top-0 left-0 z-10"
 
               />
               <Image
@@ -66,7 +66,7 @@ export default function LandingPage() {
                 alt="Delicious Dish 2"
                 width={300}
                 height={300}
-                className="absolute w-30 h-30 md:w-60 md:h-60 object-cover rounded-full shadow-md
+                className="absolute w-30 h-30 md:w-40 md:h-40 object-cover rounded-full shadow-md
                   top-8 left-5 md:top-20 md:left-20 z-10"
               />
             </div>
