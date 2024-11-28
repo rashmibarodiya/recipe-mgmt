@@ -77,7 +77,7 @@ export default function LandingPage() {
       </div>
 
       <div
-        className="text-2xl md:text-4xl text-indigo-950 font-bold text-center text-white 
+        className="text-2xl md:text-4xl font-bold text-center text-white 
       bg-gradient-to-r from-red-400 via-red-200 to-red-400 shadow-xl 
       rounded-lg p-6 md:p-8 w-3/4 max-w-4xl mx-auto lg:my-6 transform transition-transform hover:scale-105"
       >
