@@ -6,6 +6,13 @@ This repository is a **Turborepo** that serves as a monorepo for managing multip
 
 - **apps/**
   - **myapp (RecipeWorld)** - A recipe management application where users can explore, add, edit, and rate recipes. See the [RecipeWorld README](apps/myapp/README.md) for more details.
+
+### How It Works  
+<video src="./apps/myapp/public/video/RecipeWorld.mp4" controls width="60%"></video>  
+
+### See Responsiveness  
+<video src="./apps/myapp/public/video/RecipeWorldResponsive.mp4" controls width="60%"></video>
+
   - **web** - A placeholder for a generic web application.
   - **doc** - Documentation or content-related application.
 

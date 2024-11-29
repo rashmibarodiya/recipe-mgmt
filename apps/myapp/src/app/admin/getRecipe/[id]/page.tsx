@@ -71,7 +71,7 @@ const RecipeDetailPage = () => {
       {/* Conditionally render the recipes array if mine is false */}
       {!mine && check && recipes && recipes.length > 0 && (
         <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-4">More Recipes byyyy {recipe?.authorName}</h2>
+          <h2 className="text-2xl font-bold mb-4">More recipes by {recipe?.authorName}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {recipes.map((recipe, index) => (
               <div key={index} className="  shadow-md rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-300">
