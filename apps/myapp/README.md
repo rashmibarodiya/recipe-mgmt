@@ -33,7 +33,7 @@ Welcome to **RecipeWorld**, a powerful recipe management application built with 
 <video src="./public/video/RecipeWorld.mp4" controls width="60%"></video>  
 
 ### See Responsiveness  
-<video src="./public/video/RecipeWorldResponsive.mp4" controls width="60%"></video>
+<video src="./public/video/RecipeWorldResponsive2.mp4" controls width="60%"></video>
 
 ## 🛠️ Tech Stack  
 
