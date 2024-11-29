@@ -28,11 +28,18 @@ Welcome to **RecipeWorld**, a powerful recipe management application built with 
 ---
 
 ## 🎥 Demonstrations  
+
 ### How It Works  
-![How It Works](https://raw.githubusercontent.com/rashmibarodiya/recipe-mgmt/main/apps/myapp/public/video/RecipeWorld.mp4)
+
+
+https://github.com/user-attachments/assets/82238f0d-ab04-4f79-a3c1-fbc8d109489c
+
 
 ### See Responsiveness  
-![See Responsiveness](https://raw.githubusercontent.com/rashmibarodiya/recipe-mgmt/main/apps/myapp/public/video/RecipeWorldResponsive2.mp4)
+
+
+
+https://github.com/user-attachments/assets/4af7b588-2552-4b0a-a0bc-d4aa1add221e
 
 ## 🛠️ Tech Stack  
 
