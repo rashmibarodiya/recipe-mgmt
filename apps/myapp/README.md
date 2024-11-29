@@ -28,12 +28,11 @@ Welcome to **RecipeWorld**, a powerful recipe management application built with 
 ---
 
 ## 🎥 Demonstrations  
-
 ### How It Works  
-<video src="./public/video/RecipeWorld.mp4" controls width="60%"></video>  
+![How It Works](https://raw.githubusercontent.com/rashmibarodiya/recipe-mgmt/main/apps/myapp/public/video/RecipeWorld.mp4)
 
 ### See Responsiveness  
-<video src="./public/video/RecipeWorldResponsive2.mp4" controls width="60%"></video>
+![See Responsiveness](https://raw.githubusercontent.com/rashmibarodiya/recipe-mgmt/main/apps/myapp/public/video/RecipeWorldResponsive2.mp4)
 
 ## 🛠️ Tech Stack  
 
